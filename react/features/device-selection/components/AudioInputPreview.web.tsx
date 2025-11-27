@@ -25,7 +25,7 @@ const useStyles = makeStyles()((theme) => {
             flex: 1,
             height: '4px',
             borderRadius: '1px',
-            backgroundColor: 'rgba(0,0,0,0.25)', // changed for new design @sam
+            backgroundColor: 'rgba(0,0,0,0.25)', // changed for new design @cinewar
             marginRight: theme.spacing(1),
 
             '&:last-of-type': {
@@ -34,7 +34,7 @@ const useStyles = makeStyles()((theme) => {
         },
 
         activeSection: {
-            backgroundColor: '#E631FA', // changed for new design @sam
+            backgroundColor: '#E631FA', // changed for new design @cinewar
         },
     };
 });

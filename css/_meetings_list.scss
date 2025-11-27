@@ -9,7 +9,7 @@
     position: relative;
     overflow-y: auto;
     flex-grow: 1;
-    margin: 4px auto;// Adjusted to center the list with auto left/right margins @sam
+    margin: 4px auto;// Adjusted to center the list with auto left/right margins @cinewar
 
     .meetings-list-empty {
         text-align: center;
@@ -158,8 +158,8 @@
         display: none;
         margin-right: 16px;
         position: absolute;
-        padding: 6px 3px; // Increased clickable area @sam
-        border-radius: 7px; // Match item border radius @sam
+        padding: 6px 3px; // Increased clickable area @cinewar
+        border-radius: 7px; // Match item border radius @cinewar
 
         &>svg {
             fill: #0074e0;
@@ -172,7 +172,7 @@
         .delete-meeting {
             display: block;
             &:hover {
-                background: rgba(0,0,0,0.24) // Added hover background for better UX @sam
+                background: rgba(0,0,0,0.24) // Added hover background for better UX @cinewar
             }
         }
 

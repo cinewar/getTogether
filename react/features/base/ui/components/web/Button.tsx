@@ -77,14 +77,20 @@ const useStyles = makeStyles()((theme) => {
             },
         },
 
-        primary: {},
+        primary: {
+            backgroundColor: '#00BFFF', // changed for better view @cinewar
+            color: '#000000', // changed for better view @cinewar
+            '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @cinewar
+            },
+        },
 
         secondary: {
-            backgroundColor: '#E631FA', // changed for better view @sam
-            color: '#000000', // changed for better view @sam
+            backgroundColor: '#E631FA', // changed for better view @cinewar
+            color: '#000000', // changed for better view @cinewar
 
             '&:hover': {
-                backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @sam
+                backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @cinewar
             },
 
             '&:active': {
@@ -97,11 +103,11 @@ const useStyles = makeStyles()((theme) => {
         },
 
         tertiary: {
-            backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @sam
-            color: '#000000', // changed for better view @sam
+            backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @cinewar
+            color: '#000000', // changed for better view @cinewar
 
             '&:hover': {
-                backgroundColor: 'rgba(0,0,0,0.50)', // changed for better view @sam
+                backgroundColor: 'rgba(0,0,0,0.50)', // changed for better view @cinewar
             },
 
             '&:active': {

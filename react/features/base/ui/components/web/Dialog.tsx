@@ -23,7 +23,7 @@ const useStyles = makeStyles()((theme) => {
         },
 
         title: {
-            color: '#000000', // changed for better appereance @sam
+            color: '#000000', // changed for better appereance @cinewar
             margin: 0,
             padding: 0,
         },

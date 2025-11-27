@@ -4,7 +4,8 @@ import { WithTranslation } from 'react-i18next';
 import { withStyles } from 'tss-react/mui';
 
 import AbstractDialogTab, {
-    IProps as AbstractDialogTabProps } from '../../../base/dialog/components/web/AbstractDialogTab';
+    IProps as AbstractDialogTabProps,
+} from '../../../base/dialog/components/web/AbstractDialogTab';
 import { translate } from '../../../base/i18n/functions';
 import Checkbox from '../../../base/ui/components/web/Checkbox';
 
@@ -12,7 +13,6 @@ import Checkbox from '../../../base/ui/components/web/Checkbox';
  * The type of the React {@code Component} props of {@link NotificationsTab}.
  */
 export interface IProps extends AbstractDialogTabProps, WithTranslation {
-
     /**
      * CSS classes object.
      */
@@ -69,8 +69,8 @@ export interface IProps extends AbstractDialogTabProps, WithTranslation {
     soundsParticipantLeft: Boolean;
 
     /**
-    * Whether or not the sound for reactions should play.
-    */
+     * Whether or not the sound for reactions should play.
+     */
     soundsReactions: Boolean;
 
     /**
@@ -86,8 +86,8 @@ const styles = (theme: Theme) => {
             width: '100%',
 
             '@media (max-width: 607px)': {
-                flexDirection: 'column' as const
-            }
+                flexDirection: 'column' as const,
+            },
         },
 
         column: {
@@ -100,20 +100,20 @@ const styles = (theme: Theme) => {
 
                 '@media (max-width: 607px)': {
                     marginRight: 0,
-                    marginBottom: theme.spacing(3)
-                }
-            }
+                    marginBottom: theme.spacing(3),
+                },
+            },
         },
 
         title: {
             ...theme.typography.heading6,
-            color: `${theme.palette.text01} !important`,
-            marginBottom: theme.spacing(3)
+            color: '#000000 !important',
+            marginBottom: theme.spacing(3),
         },
 
         checkbox: {
-            marginBottom: theme.spacing(3)
-        }
+            marginBottom: theme.spacing(3),
+        },
     };
 };
 
@@ -159,8 +159,8 @@ class NotificationsTab extends AbstractDialogTab<IProps, any> {
         super._onChange({
             enabledNotifications: {
                 ...this.props.enabledNotifications,
-                [type]: checked
-            }
+                [type]: checked,
+            },
         });
     }
 
@@ -184,85 +184,85 @@ class NotificationsTab extends AbstractDialogTab<IProps, any> {
             soundsReactions,
             enableReactions,
             moderatorMutedSoundsReactions,
-            t
+            t,
         } = this.props;
         const classes = withStyles.getClasses(this.props);
 
         return (
-            <form
-                className = { classes.container }
-                key = 'sounds'>
+            <form className={classes.container} key="sounds">
                 {showSoundsSettings && (
-                    <fieldset className = { classes.column }>
-                        <legend className = { classes.title }>
-                            {t('settings.playSounds')}
-                        </legend>
-                        {enableReactions && <Checkbox
-                            checked = { soundsReactions && !disabledSounds.includes('REACTION_SOUND') }
-                            className = { classes.checkbox }
-                            disabled = { Boolean(moderatorMutedSoundsReactions
-                                || disabledSounds.includes('REACTION_SOUND')) }
-                            label = { t('settings.reactions') }
-                            name = 'soundsReactions'
-                            onChange = { this._onChange } />
-                        }
+                    <fieldset className={classes.column}>
+                        <legend className={classes.title}>{t('settings.playSounds')}</legend>
+                        {enableReactions && (
+                            <Checkbox
+                                checked={soundsReactions && !disabledSounds.includes('REACTION_SOUND')}
+                                className={classes.checkbox}
+                                disabled={Boolean(
+                                    moderatorMutedSoundsReactions || disabledSounds.includes('REACTION_SOUND')
+                                )}
+                                label={t('settings.reactions')}
+                                name="soundsReactions"
+                                onChange={this._onChange}
+                            />
+                        )}
                         <Checkbox
-                            checked = { soundsIncomingMessage && !disabledSounds.includes('INCOMING_MSG_SOUND') }
-                            className = { classes.checkbox }
-                            disabled = { disabledSounds.includes('INCOMING_MSG_SOUND') }
-                            label = { t('settings.incomingMessage') }
-                            name = 'soundsIncomingMessage'
-                            onChange = { this._onChange } />
+                            checked={soundsIncomingMessage && !disabledSounds.includes('INCOMING_MSG_SOUND')}
+                            className={classes.checkbox}
+                            disabled={disabledSounds.includes('INCOMING_MSG_SOUND')}
+                            label={t('settings.incomingMessage')}
+                            name="soundsIncomingMessage"
+                            onChange={this._onChange}
+                        />
                         <Checkbox
-                            checked = { soundsParticipantJoined
-                                && !disabledSounds.includes('PARTICIPANT_JOINED_SOUND') }
-                            className = { classes.checkbox }
-                            disabled = { disabledSounds.includes('PARTICIPANT_JOINED_SOUND') }
-                            label = { t('settings.participantJoined') }
-                            name = 'soundsParticipantJoined'
-                            onChange = { this._onChange } />
+                            checked={soundsParticipantJoined && !disabledSounds.includes('PARTICIPANT_JOINED_SOUND')}
+                            className={classes.checkbox}
+                            disabled={disabledSounds.includes('PARTICIPANT_JOINED_SOUND')}
+                            label={t('settings.participantJoined')}
+                            name="soundsParticipantJoined"
+                            onChange={this._onChange}
+                        />
                         <Checkbox
-                            checked = { soundsParticipantLeft && !disabledSounds.includes('PARTICIPANT_LEFT_SOUND') }
-                            className = { classes.checkbox }
-                            disabled = { disabledSounds.includes('PARTICIPANT_LEFT_SOUND') }
-                            label = { t('settings.participantLeft') }
-                            name = 'soundsParticipantLeft'
-                            onChange = { this._onChange } />
+                            checked={soundsParticipantLeft && !disabledSounds.includes('PARTICIPANT_LEFT_SOUND')}
+                            className={classes.checkbox}
+                            disabled={disabledSounds.includes('PARTICIPANT_LEFT_SOUND')}
+                            label={t('settings.participantLeft')}
+                            name="soundsParticipantLeft"
+                            onChange={this._onChange}
+                        />
                         <Checkbox
-                            checked = { soundsTalkWhileMuted && !disabledSounds.includes('TALK_WHILE_MUTED_SOUND') }
-                            className = { classes.checkbox }
-                            disabled = { disabledSounds.includes('TALK_WHILE_MUTED_SOUND') }
-                            label = { t('settings.talkWhileMuted') }
-                            name = 'soundsTalkWhileMuted'
-                            onChange = { this._onChange } />
+                            checked={soundsTalkWhileMuted && !disabledSounds.includes('TALK_WHILE_MUTED_SOUND')}
+                            className={classes.checkbox}
+                            disabled={disabledSounds.includes('TALK_WHILE_MUTED_SOUND')}
+                            label={t('settings.talkWhileMuted')}
+                            name="soundsTalkWhileMuted"
+                            onChange={this._onChange}
+                        />
                         <Checkbox
-                            checked = { soundsParticipantKnocking
-                                && !disabledSounds.includes('KNOCKING_PARTICIPANT_SOUND') }
-                            className = { classes.checkbox }
-                            disabled = { disabledSounds.includes('KNOCKING_PARTICIPANT_SOUND') }
-                            label = { t('settings.participantKnocking') }
-                            name = 'soundsParticipantKnocking'
-                            onChange = { this._onChange } />
+                            checked={
+                                soundsParticipantKnocking && !disabledSounds.includes('KNOCKING_PARTICIPANT_SOUND')
+                            }
+                            className={classes.checkbox}
+                            disabled={disabledSounds.includes('KNOCKING_PARTICIPANT_SOUND')}
+                            label={t('settings.participantKnocking')}
+                            name="soundsParticipantKnocking"
+                            onChange={this._onChange}
+                        />
                     </fieldset>
                 )}
                 {showNotificationsSettings && (
-                    <fieldset className = { classes.column }>
-                        <legend className = { classes.title }>
-                            {t('notify.displayNotifications')}
-                        </legend>
-                        {
-                            Object.keys(enabledNotifications).map(key => (
-                                <Checkbox
-                                    checked = { Boolean(enabledNotifications[key as
-                                        keyof typeof enabledNotifications]) }
-                                    className = { classes.checkbox }
-                                    key = { key }
-                                    label = { t(key) }
-                                    name = { `show-${key}` }
-                                    /* eslint-disable-next-line react/jsx-no-bind */
-                                    onChange = { e => this._onEnabledNotificationsChanged(e, key) } />
-                            ))
-                        }
+                    <fieldset className={classes.column}>
+                        <legend className={classes.title}>{t('notify.displayNotifications')}</legend>
+                        {Object.keys(enabledNotifications).map((key) => (
+                            <Checkbox
+                                checked={Boolean(enabledNotifications[key as keyof typeof enabledNotifications])}
+                                className={classes.checkbox}
+                                key={key}
+                                label={t(key)}
+                                name={`show-${key}`}
+                                /* eslint-disable-next-line react/jsx-no-bind */
+                                onChange={(e) => this._onEnabledNotificationsChanged(e, key)}
+                            />
+                        ))}
                     </fieldset>
                 )}
             </form>

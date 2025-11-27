@@ -219,7 +219,7 @@ export const commonStyles = (theme: Theme) => {
 
             '@media (hover: hover) and (pointer: fine)': {
                 '&:hover': {
-                    backgroundColor: 'rgba(0, 0, 0, 0.24)' /* hover color changed for better usability @sam */,
+                    backgroundColor: 'rgba(0, 0, 0, 0.24)' /* hover color changed for better usability @cinewar */,
                 },
 
                 '&:active': {

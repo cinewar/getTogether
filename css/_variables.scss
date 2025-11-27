@@ -1,7 +1,7 @@
 /**
  * Style variables
  */
-$baseFontFamily: -apple-system, BlinkMacSystemFont,"lato", "open_sanslight", "Helvetica Neue", Helvetica, Arial, sans-serif;// added "lato" for better font rendering @sam
+$baseFontFamily: -apple-system, BlinkMacSystemFont,"lato", "open_sanslight", "Helvetica Neue", Helvetica, Arial, sans-serif;// added "lato" for better font rendering @cinewar
 
 /**
  * Size variables.
@@ -61,7 +61,7 @@ $unsupportedDesktopBrowserTextFontSize: 1.25rem;
 $watermarkWidth: 71px;
 $watermarkHeight: 32px;
 
-// Welcome page watermark size changed @sam
+// Welcome page watermark size changed @cinewar
 $welcomePageWatermarkWidth: 116px;
 $welcomePageWatermarkHeight: 70px;
 
@@ -81,7 +81,7 @@ $welcomePageHeaderPadding: 1rem;
 $welcomePageHeaderTitleMaxWidth: initial;
 $welcomePageHeaderTextAlign: center;
 $welcomePageButtonBg: #E631FA;
-$welcomePageButtonHoverBg: rgba(0,0,0,0.24); // Changed hover background for better UX @sam
+$welcomePageButtonHoverBg: rgba(0,0,0,0.24); // Changed hover background for better UX @cinewar
 $welcomePageButtonFocusOutline: #00225a;
 
 $welcomePageHeaderContainerMarginTop: 104px;

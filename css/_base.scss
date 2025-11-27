@@ -45,9 +45,9 @@ body {
 
 .jitsi-icon {
     &-default svg {
-        fill: none; // chaged for better compatibility @sam
-        width: 34px; // chaged for better compatibility @sam
-        height: 34px; // chaged for better compatibility @sam
+        fill: none; // chaged for better compatibility @cinewar
+        width: 34px; // chaged for better compatibility @cinewar
+        height: 34px; // chaged for better compatibility @cinewar
     }
 }
 
@@ -175,7 +175,7 @@ form {
 
 /* Necessary for the new icons to work properly. */
 .jitsi-icon svg path {
-    //fill: inherit; changed to use currentColor for better compatibility @sam
+    //fill: inherit; changed to use currentColor for better compatibility @cinewar
 }
 
 .sr-only {

@@ -64,9 +64,9 @@ const useStyles = makeStyles()((theme) => {
         },
 
         input: {
-            backgroundColor: theme.palette.ui03,
-            background: theme.palette.ui03,
-            color: theme.palette.text01,
+            backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @cinewar
+            background: 'rgba(0,0,0,0.24)', // changed for better view @cinewar
+            color: '#000000', // changed for better view @cinewar
             ...theme.typography.bodyShortRegular,
             padding: '10px 16px',
             borderRadius: theme.shape.borderRadius,
@@ -76,12 +76,12 @@ const useStyles = makeStyles()((theme) => {
             width: '100%',
 
             '&::placeholder': {
-                color: theme.palette.text02,
+                color: '#6E6E6E', // changed for better view @cinewar
             },
 
             '&:focus': {
                 outline: 0,
-                boxShadow: `0px 0px 0px 2px ${theme.palette.focus01}`,
+                boxShadow: '0px 0px 0px 2px #E631FA', // changed for better view @cinewar
             },
 
             '&:disabled': {

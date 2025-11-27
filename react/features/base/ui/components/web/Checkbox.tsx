@@ -6,7 +6,6 @@ import Icon from '../../../icons/components/Icon';
 import { IconCheck } from '../../../icons/svg';
 
 interface ICheckboxProps {
-
     /**
      * Whether the input is checked or not.
      */
@@ -43,22 +42,21 @@ interface ICheckboxProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const useStyles = makeStyles()(theme => {
+const useStyles = makeStyles()((theme) => {
     return {
         formControl: {
             ...theme.typography.bodyLongRegular,
-            color: theme.palette.text01,
+            color: '#000000', // changed for better view @cinewar
             display: 'inline-flex',
             alignItems: 'center',
 
             '&.is-mobile': {
-                ...theme.typography.bodyLongRegularLarge
-
-            }
+                ...theme.typography.bodyLongRegularLarge,
+            },
         },
 
         disabled: {
-            cursor: 'not-allowed'
+            cursor: 'not-allowed',
         },
 
         activeArea: {
@@ -70,18 +68,21 @@ const useStyles = makeStyles()(theme => {
             marginRight: '15px',
             position: 'relative',
             cursor: 'pointer',
+            borderRadius: '4px',
+            '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.25)', // changed for better view @cinewar
+            },
 
             '& input[type="checkbox"]': {
                 appearance: 'none',
                 backgroundColor: 'transparent',
                 margin: '3px',
                 font: 'inherit',
-                color: theme.palette.icon03,
+                color: 'theme.palette.icon03',
                 width: '18px',
                 height: '18px',
-                border: `2px solid ${theme.palette.icon03}`,
+                border: '2px solid #E631FA',
                 borderRadius: '3px',
-
                 display: 'grid',
                 placeContent: 'center',
 
@@ -90,17 +91,24 @@ const useStyles = makeStyles()(theme => {
                     width: '18px',
                     height: '18px',
                     opacity: 0,
-                    backgroundColor: theme.palette.action01,
+                    backgroundColor: '#E631FA', // changed for better view @cinewar
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     border: 0,
                     borderRadius: '3px',
-                    transition: '.2s'
+                    transition: '.2s',
+                    color: 'red',
+                },
+
+                '&:hover': {
+                    '&::before': {
+                        backgroundColor: 'rgba(0,0,0,0.25)',
+                    }, // changed for better view @cinewar
                 },
 
                 '&:checked::before': {
-                    opacity: 1
+                    opacity: 1,
                 },
 
                 '&:disabled': {
@@ -108,13 +116,20 @@ const useStyles = makeStyles()(theme => {
                     borderColor: theme.palette.ui04,
 
                     '&::before': {
-                        backgroundColor: theme.palette.ui04
-                    }
+                        backgroundColor: theme.palette.ui04,
+                    },
                 },
 
                 '&:checked+.checkmark': {
-                    opacity: 1
-                }
+                    opacity: 1,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    svg: {
+                        width: '15px',
+                        height: '15px',
+                        margin: '2px',
+                    },
+                },
             },
 
             '& .checkmark': {
@@ -122,7 +137,7 @@ const useStyles = makeStyles()(theme => {
                 left: '3px',
                 top: '3px',
                 opacity: 0,
-                transition: '.2s'
+                transition: '.2s',
             },
 
             '&.is-mobile': {
@@ -135,47 +150,34 @@ const useStyles = makeStyles()(theme => {
 
                     '&::before': {
                         width: '24px',
-                        height: '24px'
-                    }
+                        height: '24px',
+                    },
                 },
 
                 '& .checkmark': {
                     left: '11px',
-                    top: '10px'
-                }
-            }
-        }
+                    top: '10px',
+                },
+            },
+        },
     };
 });
 
-const Checkbox = ({
-    checked,
-    className,
-    disabled,
-    id,
-    label,
-    name,
-    onChange
-}: ICheckboxProps) => {
+const Checkbox = ({ checked, className, disabled, id, label, name, onChange }: ICheckboxProps) => {
     const { classes: styles, cx, theme } = useStyles();
     const isMobile = isMobileBrowser();
 
     return (
-        <label className = { cx(styles.formControl, isMobile && 'is-mobile', className) }>
-            <div className = { cx(styles.activeArea, isMobile && 'is-mobile', disabled && styles.disabled) }>
-                <input
-                    checked = { checked }
-                    disabled = { disabled }
-                    id = { id }
-                    name = { name }
-                    onChange = { onChange }
-                    type = 'checkbox' />
+        <label className={cx(styles.formControl, isMobile && 'is-mobile', className)}>
+            <div className={cx(styles.activeArea, isMobile && 'is-mobile', disabled && styles.disabled)}>
+                <input checked={checked} disabled={disabled} id={id} name={name} onChange={onChange} type="checkbox" />
                 <Icon
-                    aria-hidden = { true }
-                    className = 'checkmark'
-                    color = { disabled ? theme.palette.icon03 : theme.palette.icon01 }
-                    size = { 18 }
-                    src = { IconCheck } />
+                    aria-hidden={true}
+                    className="checkmark"
+                    color={disabled ? theme.palette.icon03 : theme.palette.icon01}
+                    size={18}
+                    src={IconCheck}
+                />
             </div>
             <div>{label}</div>
         </label>

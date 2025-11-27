@@ -8,7 +8,6 @@ import { IAvatarProps } from '../../types';
 import { PRESENCE_AVAILABLE_COLOR, PRESENCE_AWAY_COLOR, PRESENCE_BUSY_COLOR, PRESENCE_IDLE_COLOR } from '../styles';
 
 interface IProps extends IAvatarProps {
-
     /**
      * External class name passed through props.
      */
@@ -45,12 +44,12 @@ interface IProps extends IAvatarProps {
     useCORS?: boolean;
 }
 
-const useStyles = makeStyles()(theme => {
+const useStyles = makeStyles()((theme) => {
     return {
         avatar: {
-            backgroundColor: '#AAA',
+            backgroundColor: 'rgba(0, 0, 0,0.24) !important',
             borderRadius: '50%',
-            color: theme.palette?.text01 || '#fff',
+            color: theme.palette?.text01 || '#E631FA',
             ...(theme.typography?.heading1 ?? {}),
             fontSize: 'inherit',
             objectFit: 'cover',
@@ -59,22 +58,22 @@ const useStyles = makeStyles()(theme => {
 
             '&.avatar-small': {
                 height: '28px !important',
-                width: '28px !important'
+                width: '28px !important',
             },
 
             '&.avatar-xsmall': {
                 height: '16px !important',
-                width: '16px !important'
+                width: '16px !important',
             },
 
             '& .jitsi-icon': {
-                transform: 'translateY(50%)'
+                transform: 'translateY(50%)',
             },
 
             '& .avatar-svg': {
                 height: '100%',
-                width: '100%'
-            }
+                width: '100%',
+            },
         },
 
         initialsContainer: {
@@ -82,7 +81,8 @@ const useStyles = makeStyles()(theme => {
             height: '100%',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            color: '#E631FA', // changed for better view @cinewar
         },
 
         badge: {
@@ -95,25 +95,25 @@ const useStyles = makeStyles()(theme => {
                 height: '35%',
                 position: 'absolute',
                 bottom: 0,
-                width: '35%'
+                width: '35%',
             },
 
             '&.avatar-badge-available:after': {
-                backgroundColor: PRESENCE_AVAILABLE_COLOR
+                backgroundColor: PRESENCE_AVAILABLE_COLOR,
             },
 
             '&.avatar-badge-away:after': {
-                backgroundColor: PRESENCE_AWAY_COLOR
+                backgroundColor: PRESENCE_AWAY_COLOR,
             },
 
             '&.avatar-badge-busy:after': {
-                backgroundColor: PRESENCE_BUSY_COLOR
+                backgroundColor: PRESENCE_BUSY_COLOR,
             },
 
             '&.avatar-badge-idle:after': {
-                backgroundColor: PRESENCE_IDLE_COLOR
-            }
-        }
+                backgroundColor: PRESENCE_IDLE_COLOR,
+            },
+        },
     };
 });
 
@@ -129,7 +129,7 @@ const StatelessAvatar = ({
     status,
     testId,
     url,
-    useCORS
+    useCORS,
 }: IProps) => {
     const { classes, cx } = useStyles();
 
@@ -138,7 +138,7 @@ const StatelessAvatar = ({
             background: backgroundColor || undefined,
             fontSize: size ? pixelsToRem(size * 0.4) : '180%',
             height: size || '100%',
-            width: size || '100%'
+            width: size || '100%',
         };
     };
 
@@ -156,34 +156,34 @@ const StatelessAvatar = ({
         if (typeof onAvatarLoadError === 'function') {
             onAvatarLoadError(onAvatarLoadErrorParams);
         }
-    }, [ onAvatarLoadError, onAvatarLoadErrorParams ]);
+    }, [onAvatarLoadError, onAvatarLoadErrorParams]);
 
     if (isIcon(url)) {
         return (
             <div
-                className = { cx(_getAvatarClassName(), _getBadgeClassName()) }
-                data-testid = { testId }
-                id = { id }
-                style = { _getAvatarStyle(color) }>
-                <Icon
-                    size = '50%'
-                    src = { url } />
+                className={cx(_getAvatarClassName(), _getBadgeClassName())}
+                data-testid={testId}
+                id={id}
+                style={_getAvatarStyle(color)}
+            >
+                <Icon size="50%" src={url} />
             </div>
         );
     }
 
     if (url) {
         return (
-            <div className = { _getBadgeClassName() }>
+            <div className={_getBadgeClassName()}>
                 <img
-                    alt = 'avatar'
-                    className = { _getAvatarClassName() }
-                    crossOrigin = { useCORS ? '' : undefined }
-                    data-testid = { testId }
-                    id = { id }
-                    onError = { _onAvatarLoadError }
-                    src = { url }
-                    style = { _getAvatarStyle() } />
+                    alt="avatar"
+                    className={_getAvatarClassName()}
+                    crossOrigin={useCORS ? '' : undefined}
+                    data-testid={testId}
+                    id={id}
+                    onError={_onAvatarLoadError}
+                    src={url}
+                    style={_getAvatarStyle()}
+                />
             </div>
         );
     }
@@ -191,13 +191,12 @@ const StatelessAvatar = ({
     if (initials) {
         return (
             <div
-                className = { cx(_getAvatarClassName(), _getBadgeClassName()) }
-                data-testid = { testId }
-                id = { id }
-                style = { _getAvatarStyle(color) }>
-                <div className = { classes.initialsContainer }>
-                    {initials}
-                </div>
+                className={cx(_getAvatarClassName(), _getBadgeClassName())}
+                data-testid={testId}
+                id={id}
+                style={_getAvatarStyle(color)}
+            >
+                <div className={classes.initialsContainer}>{initials}</div>
             </div>
         );
     }
@@ -205,16 +204,14 @@ const StatelessAvatar = ({
     // default avatar
     return (
         <div
-            className = { cx(_getAvatarClassName('defaultAvatar'), _getBadgeClassName()) }
-            data-testid = { testId }
-            id = { id }
-            style = { _getAvatarStyle() }>
-            <Icon
-                size = { '50%' }
-                src = { iconUser } />
+            className={cx(_getAvatarClassName('defaultAvatar'), _getBadgeClassName())}
+            data-testid={testId}
+            id={id}
+            style={_getAvatarStyle()}
+        >
+            <Icon size={'50%'} src={iconUser} />
         </div>
     );
 };
-
 
 export default StatelessAvatar;

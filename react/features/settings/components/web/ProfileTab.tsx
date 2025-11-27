@@ -10,7 +10,8 @@ import { IStore } from '../../../app/types';
 import { login, logout } from '../../../authentication/actions.web';
 import Avatar from '../../../base/avatar/components/Avatar';
 import AbstractDialogTab, {
-    IProps as AbstractDialogTabProps } from '../../../base/dialog/components/web/AbstractDialogTab';
+    IProps as AbstractDialogTabProps,
+} from '../../../base/dialog/components/web/AbstractDialogTab';
 import { translate } from '../../../base/i18n/functions';
 import Button from '../../../base/ui/components/web/Button';
 import Input from '../../../base/ui/components/web/Input';
@@ -19,7 +20,6 @@ import Input from '../../../base/ui/components/web/Input';
  * The type of the React {@code Component} props of {@link ProfileTab}.
  */
 export interface IProps extends AbstractDialogTabProps, WithTranslation {
-
     /**
      * Whether server-side authentication is available.
      */
@@ -72,29 +72,29 @@ const styles = (theme: Theme) => {
             display: 'flex',
             flexDirection: 'column' as const,
             width: '100%',
-            padding: '0 2px'
+            padding: '0 2px',
         },
 
         avatarContainer: {
             display: 'flex',
             width: '100%',
             justifyContent: 'center',
-            marginBottom: theme.spacing(4)
+            marginBottom: theme.spacing(4),
         },
 
         bottomMargin: {
-            marginBottom: theme.spacing(4)
+            marginBottom: theme.spacing(4),
         },
 
         label: {
             color: `${theme.palette.text01} !important`,
             ...theme.typography.bodyShortRegular,
-            marginBottom: theme.spacing(2)
+            marginBottom: theme.spacing(2),
         },
 
         name: {
-            marginBottom: theme.spacing(1)
-        }
+            marginBottom: theme.spacing(1),
+        },
     };
 };
 
@@ -106,7 +106,7 @@ const styles = (theme: Theme) => {
 class ProfileTab extends AbstractDialogTab<IProps, any> {
     static defaultProps = {
         displayName: '',
-        email: ''
+        email: '',
     };
 
     /**
@@ -153,46 +153,40 @@ class ProfileTab extends AbstractDialogTab<IProps, any> {
      * @returns {ReactElement}
      */
     override render() {
-        const {
-            authEnabled,
-            displayName,
-            email,
-            hideEmailInSettings,
-            id,
-            readOnlyName,
-            t
-        } = this.props;
+        const { authEnabled, displayName, email, hideEmailInSettings, id, readOnlyName, t } = this.props;
         const classes = withStyles.getClasses(this.props);
 
         return (
-            <div className = { classes.container } >
-                <div className = { classes.avatarContainer }>
-                    <Avatar
-                        participantId = { id }
-                        size = { 60 } />
+            <div className={classes.container}>
+                <div className={classes.avatarContainer}>
+                    <Avatar participantId={id} size={60} />
                 </div>
                 <Input
-                    className = { classes.bottomMargin }
-                    disabled = { readOnlyName }
-                    id = 'setDisplayName'
-                    label = { t('profile.setDisplayNameLabel') }
-                    name = 'name'
-                    onChange = { this._onDisplayNameChange }
-                    placeholder = { t('settings.name') }
-                    type = 'text'
-                    value = { displayName } />
-                {!hideEmailInSettings && <div className = 'profile-edit-field'>
-                    <Input
-                        className = { classes.bottomMargin }
-                        id = 'setEmail'
-                        label = { t('profile.setEmailLabel') }
-                        name = 'email'
-                        onChange = { this._onEmailChange }
-                        placeholder = { t('profile.setEmailInput') }
-                        type = 'text'
-                        value = { email } />
-                </div>}
-                { authEnabled && this._renderAuth() }
+                    className={classes.bottomMargin}
+                    disabled={readOnlyName}
+                    id="setDisplayName"
+                    label={t('profile.setDisplayNameLabel')}
+                    name="name"
+                    onChange={this._onDisplayNameChange}
+                    placeholder={t('settings.name')}
+                    type="text"
+                    value={displayName}
+                />
+                {!hideEmailInSettings && (
+                    <div className="profile-edit-field">
+                        <Input
+                            className={classes.bottomMargin}
+                            id="setEmail"
+                            label={t('profile.setEmailLabel')}
+                            name="email"
+                            onChange={this._onEmailChange}
+                            placeholder={t('profile.setEmailInput')}
+                            type="text"
+                            value={email}
+                        />
+                    </div>
+                )}
+                {authEnabled && this._renderAuth()}
             </div>
         );
     }
@@ -223,26 +217,19 @@ class ProfileTab extends AbstractDialogTab<IProps, any> {
      * @returns {ReactElement}
      */
     _renderAuth() {
-        const {
-            authLogin,
-            t
-        } = this.props;
+        const { authLogin, t } = this.props;
         const classes = withStyles.getClasses(this.props);
 
         return (
             <div>
-                <h2 className = { classes.label }>
-                    { t('toolbar.authenticate') }
-                </h2>
-                { authLogin
-                    && <div className = { classes.name }>
-                        { t('settings.loggedIn', { name: authLogin }) }
-                    </div> }
+                <h2 className={classes.label}>{t('toolbar.authenticate')}</h2>
+                {authLogin && <div className={classes.name}>{t('settings.loggedIn', { name: authLogin })}</div>}
                 <Button
-                    accessibilityLabel = { authLogin ? t('toolbar.logout') : t('toolbar.login') }
-                    id = 'login_button'
-                    label = { authLogin ? t('toolbar.logout') : t('toolbar.login') }
-                    onClick = { this._onAuthToggle } />
+                    accessibilityLabel={authLogin ? t('toolbar.logout') : t('toolbar.login')}
+                    id="login_button"
+                    label={authLogin ? t('toolbar.logout') : t('toolbar.login')}
+                    onClick={this._onAuthToggle}
+                />
             </div>
         );
     }

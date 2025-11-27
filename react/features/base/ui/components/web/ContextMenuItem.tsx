@@ -113,7 +113,7 @@ const useStyles = makeStyles()((theme) => {
             cursor: 'pointer',
             display: 'flex',
             minHeight: '40px',
-            padding: '4px 16px', // adjusted padding for better touch target @sam
+            padding: '4px 16px', // adjusted padding for better touch target @cinewar
             boxSizing: 'border-box',
 
             '& > *:not(:last-child)': {
@@ -134,10 +134,10 @@ const useStyles = makeStyles()((theme) => {
         },
 
         selected: {
-            borderBottom: '3px solid #E631FA', // customized selected indicator @sam
+            borderBottom: '3px solid #E631FA', // customized selected indicator @cinewar
             paddingLeft: '13px',
-            backgroundColor: 'rgba(0,0,0,0.24)', // added background for better visibility @sam
-            borderRadius: '0px 7px 0px 0px', // added border radius for better aesthetics @sam
+            backgroundColor: 'rgba(0,0,0,0.24)', // added background for better visibility @cinewar
+            borderRadius: '0px 7px 0px 0px', // added border radius for better aesthetics @cinewar
         },
 
         contextMenuItemDisabled: {
@@ -174,8 +174,8 @@ const useStyles = makeStyles()((theme) => {
 
         text: {
             ...theme.typography.bodyShortRegular,
-            color: '#000000', // color changed for better view @sam
-            fontWeight: 'bold', // font-weight changed for better view @sam
+            color: '#000000', // color changed for better view @cinewar
+            fontWeight: 'bold', // font-weight changed for better view @cinewar
         },
 
         drawerText: {

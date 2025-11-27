@@ -11,7 +11,6 @@ import { resizeImage } from '../functions';
 import logger from '../logger';
 
 interface IProps extends WithTranslation {
-
     /**
      * Callback used to set the 'loading' state of the parent component.
      */
@@ -38,28 +37,35 @@ interface IProps extends WithTranslation {
     storedImages: Array<Image>;
 }
 
-const useStyles = makeStyles()(theme => {
+const useStyles = makeStyles()((theme) => {
     return {
         label: {
             ...theme.typography.bodyShortBold,
-            color: theme.palette.link01,
+            color: '#000000', // changed for better view @cinewar
             marginBottom: theme.spacing(3),
             cursor: 'pointer',
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
+            '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @cinewar
+            },
         },
 
         addBackground: {
             marginRight: theme.spacing(3),
 
+            '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @cinewar
+            },
+
             '& svg': {
-                fill: `${theme.palette.link01} !important`
-            }
+                fill: '#000000 !important',
+            },
         },
 
         input: {
-            display: 'none'
-        }
+            display: 'none',
+        },
     };
 });
 
@@ -69,82 +75,76 @@ const useStyles = makeStyles()(theme => {
  * @param {Object} Props - The props of the component.
  * @returns {React$Node}
  */
-function UploadImageButton({
-    setLoading,
-    setOptions,
-    setStoredImages,
-    showLabel,
-    storedImages,
-    t
-}: IProps) {
+function UploadImageButton({ setLoading, setOptions, setStoredImages, showLabel, storedImages, t }: IProps) {
     const { classes } = useStyles();
     const uploadImageButton = useRef<HTMLInputElement>(null);
-    const uploadImageKeyPress = useCallback(e => {
-        if (uploadImageButton.current && (e.key === ' ' || e.key === 'Enter')) {
-            e.preventDefault();
-            uploadImageButton.current.click();
-        }
-    }, [ uploadImageButton.current ]);
+    const uploadImageKeyPress = useCallback(
+        (e) => {
+            if (uploadImageButton.current && (e.key === ' ' || e.key === 'Enter')) {
+                e.preventDefault();
+                uploadImageButton.current.click();
+            }
+        },
+        [uploadImageButton.current]
+    );
 
+    const uploadImage = useCallback(
+        async (e) => {
+            const imageFile = e.target.files;
 
-    const uploadImage = useCallback(async e => {
-        const imageFile = e.target.files;
+            if (imageFile.length === 0) {
+                return;
+            }
 
-        if (imageFile.length === 0) {
-            return;
-        }
+            const reader = new FileReader();
 
-        const reader = new FileReader();
+            reader.readAsDataURL(imageFile[0]);
+            reader.onload = async () => {
+                const url = await resizeImage(reader.result);
+                const uuId = uuidv4();
 
-        reader.readAsDataURL(imageFile[0]);
-        reader.onload = async () => {
-            const url = await resizeImage(reader.result);
-            const uuId = uuidv4();
+                setStoredImages([
+                    ...storedImages,
+                    {
+                        id: uuId,
+                        src: url,
+                    },
+                ]);
+                setOptions({
+                    backgroundEffectEnabled: true,
+                    backgroundType: VIRTUAL_BACKGROUND_TYPE.IMAGE,
+                    selectedThumbnail: uuId,
+                    virtualSource: url,
+                });
+            };
+            logger.info('New virtual background image uploaded!');
 
-            setStoredImages([
-                ...storedImages,
-                {
-                    id: uuId,
-                    src: url
-                }
-            ]);
-            setOptions({
-                backgroundEffectEnabled: true,
-                backgroundType: VIRTUAL_BACKGROUND_TYPE.IMAGE,
-                selectedThumbnail: uuId,
-                virtualSource: url
-            });
-        };
-        logger.info('New virtual background image uploaded!');
-
-        reader.onerror = () => {
-            setLoading(false);
-            logger.error('Failed to upload virtual image!');
-        };
-    }, [ storedImages ]);
+            reader.onerror = () => {
+                setLoading(false);
+                logger.error('Failed to upload virtual image!');
+            };
+        },
+        [storedImages]
+    );
 
     return (
         <>
-            {showLabel && <label
-                className = { classes.label }
-                htmlFor = 'file-upload'
-                onKeyPress = { uploadImageKeyPress }
-                tabIndex = { 0 } >
-                <Icon
-                    className = { classes.addBackground }
-                    size = { 24 }
-                    src = { IconPlus } />
-                {t('virtualBackground.addBackground')}
-            </label>}
+            {showLabel && (
+                <label className={classes.label} htmlFor="file-upload" onKeyPress={uploadImageKeyPress} tabIndex={0}>
+                    <Icon className={classes.addBackground} size={24} src={IconPlus} />
+                    {t('virtualBackground.addBackground')}
+                </label>
+            )}
 
             <input
-                accept = 'image/*'
-                className = { classes.input }
-                id = 'file-upload'
-                onChange = { uploadImage }
-                ref = { uploadImageButton }
-                role = 'button'
-                type = 'file' />
+                accept="image/*"
+                className={classes.input}
+                id="file-upload"
+                onChange={uploadImage}
+                ref={uploadImageButton}
+                role="button"
+                type="file"
+            />
         </>
     );
 }

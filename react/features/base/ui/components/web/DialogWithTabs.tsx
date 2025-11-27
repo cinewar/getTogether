@@ -41,8 +41,8 @@ const useStyles = makeStyles()((theme) => {
             flexDirection: 'column',
             minWidth: '211px',
             maxWidth: '100%',
-            borderRight: '2px solid #9E9E9E', // changed border color for better visibility @sam
-            paddingLeft: '15px', // reduced padding for better alignment @sam
+            borderRight: '2px solid #9E9E9E', // changed border color for better visibility @cinewar
+            paddingLeft: '15px', // reduced padding for better alignment @cinewar
             [`@media (max-width: ${MOBILE_BREAKPOINT}px)`]: {
                 width: '100%',
                 borderRight: 'none',
@@ -55,7 +55,7 @@ const useStyles = makeStyles()((theme) => {
 
         titleContainer: {
             margin: 0,
-            padding: '35px 20px 10px', // increased top padding for better visibility @sam
+            padding: '35px 20px 10px', // increased top padding for better visibility @cinewar
             paddingRight: 0,
             display: 'flex',
             flexDirection: 'row',
@@ -69,10 +69,10 @@ const useStyles = makeStyles()((theme) => {
 
         title: {
             ...theme.typography.heading5,
-            color: '#000000', // changed to black for better visibility @sam
+            color: '#000000', // changed to black for better visibility @cinewar
             margin: 0,
             padding: 0,
-            fontSize: '1.8rem', // increased font size for better visibility @sam
+            fontSize: '1.8rem', // increased font size for better visibility @cinewar
         },
 
         contentContainer: {

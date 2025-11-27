@@ -69,7 +69,7 @@ const useStyles = makeStyles()((theme) => {
         },
 
         label: {
-            color: '#000000', // color changed for better view @sam
+            color: '#000000', // color changed for better view @cinewar
             ...theme.typography.bodyShortRegular,
             marginBottom: theme.spacing(2),
 
@@ -83,11 +83,11 @@ const useStyles = makeStyles()((theme) => {
         },
 
         select: {
-            backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @sam
-            borderRadius: '7px', // changed for better view @sam
+            backgroundColor: 'rgba(0,0,0,0.24)', // changed for better view @cinewar
+            borderRadius: '7px', // changed for better view @cinewar
             width: '100%',
             ...theme.typography.bodyShortRegular,
-            color: '#000000', // changed for better view @sam
+            color: '#000000', // changed for better view @cinewar
             padding: '10px 16px',
             paddingRight: '42px',
             border: 0,

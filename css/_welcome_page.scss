@@ -19,7 +19,7 @@ body.welcome-page {
         background-repeat: $welcomePageHeaderBackgroundRepeat;
         background-size: $welcomePageHeaderBackgroundSize;
         padding: $welcomePageHeaderPadding;
-        background-color: transparent; // transparent background for header @sam
+        background-color: transparent; // transparent background for header @cinewar
         overflow: hidden;
         position: relative;
 
@@ -30,7 +30,7 @@ body.welcome-page {
             z-index: $zindex2;
             align-items: center;
             position: relative;
-            max-width: 1200px; // Limit of header content width changed to 1200px @sam
+            max-width: 1200px; // Limit of header content width changed to 1200px @cinewar
         }
 
         .header-watermark-container {
@@ -120,7 +120,7 @@ body.welcome-page {
         #enter_room {
             display: $welcomePageEnterRoomDisplay;
             align-items: center;
-            max-width: 550px; // increased max-width for enter room container @sam
+            max-width: 550px; // increased max-width for enter room container @cinewar
             width: $welcomePageEnterRoomWidth;
             z-index: $zindex2;
             height: fit-content;
@@ -129,7 +129,7 @@ body.welcome-page {
                 margin: $welcomePageEnterRoomMargin;
                 padding: $welcomePageEnterRoomPadding;
                 border-radius: 4px;
-                background-color: transparent; // transparent background for enter room container @sam
+                background-color: transparent; // transparent background for enter room container @cinewar
                 display: flex;
                 width: 100%;
                 text-align: left;
@@ -138,9 +138,9 @@ body.welcome-page {
 
             .enter-room-input-container {
                 flex-grow: 1;
-                padding-right: 0px; // changed border color for better visibility @sam
-                border: 3px solid #48FAE8;// changed border color for better visibility @sam
-                border-radius: 7px;// changed border radius for better visibility @sam
+                padding-right: 0px; // changed border color for better visibility @cinewar
+                border: 3px solid #48FAE8;// changed border color for better visibility @cinewar
+                border-radius: 7px;// changed border radius for better visibility @cinewar
 
                 .enter-room-input {
                     border-radius: 4px;
@@ -149,17 +149,17 @@ body.welcome-page {
                     display: inline-block;
                     height: 50px;
                     width: 100%;
-                    font-size: 1rem;// increased font size for better visibility @sam
-                    font-weight: bold;// bold font for better visibility @sam
+                    font-size: 1rem;// increased font size for better visibility @cinewar
+                    font-weight: bold;// bold font for better visibility @cinewar
                     padding-left: 10px;
 
                     &.focus-visible {
-                        outline:none; // auto 3px #E631FA changed outline color for better visibility @sam
-                        background-color:rgba(0, 0, 0, 0.24); // changed background color for better visibility @sam
-                        font-size: 1rem;// increased font size on focus for better visibility @sam
-                        font-weight: bold;// bold font on focus for better visibility @sam
-                        color: #000;// changed font color on focus for better visibility @sam
-                        // changed placeholder color on focus for better visibility @sam
+                        outline:none; // auto 3px #E631FA changed outline color for better visibility @cinewar
+                        background-color:rgba(0, 0, 0, 0.24); // changed background color for better visibility @cinewar
+                        font-size: 1rem;// increased font size on focus for better visibility @cinewar
+                        font-weight: bold;// bold font on focus for better visibility @cinewar
+                        color: #000;// changed font color on focus for better visibility @cinewar
+                        // changed placeholder color on focus for better visibility @cinewar
                         &::placeholder {
                             color: #000;
                         }
@@ -188,13 +188,13 @@ body.welcome-page {
         text-align: left;
         display: $welcomePageTabContainerDisplay;
         flex-direction: column;
-        border: 3px solid #48FAE8; // changed border color for better visibility @sam
-        border-radius: 7px; // changed border radius for better visibility @sam
+        border: 3px solid #48FAE8; // changed border color for better visibility @cinewar
+        border-radius: 7px; // changed border radius for better visibility @cinewar
 
         .tab-content{
             display: $welcomePageTabContentDisplay;
             height: 250px;
-            margin: 0px 0px; // reduced margin for better layout @sam
+            margin: 0px 0px; // reduced margin for better layout @cinewar
             overflow: hidden;
             flex-grow: 1;
             position: relative;
@@ -241,7 +241,7 @@ body.welcome-page {
         // &:focus-within {
         //     outline: auto 2px $welcomePageButtonFocusOutline;
         // }
-        // cancelled focus outline for better visibility @sam
+        // cancelled focus outline for better visibility @cinewar
 
         &:hover {
             background-color: $welcomePageButtonHoverBg;
@@ -249,7 +249,7 @@ body.welcome-page {
     }
 
     .welcome-page-settings {
-        background: rgba(255, 255, 255, 0.0);// transparent background for settings button @sam
+        background: rgba(255, 255, 255, 0.0);// transparent background for settings button @cinewar
         border-radius: 3px;
         color: $welcomePageDescriptionColor;
         padding: 4px;
@@ -264,8 +264,8 @@ body.welcome-page {
         }
 
         .toolbox-icon {
-            height: 40px; // changed for better compatibility @sam
-            width: 40px; // changed for better compatibility @sam
+            height: 40px; // changed for better compatibility @cinewar
+            width: 40px; // changed for better compatibility @cinewar
         }
     }
 
@@ -292,7 +292,7 @@ body.welcome-page {
 
     .welcome-cards-container {
         color:#131519;
-        padding-top: 0px; // reduced padding for better layout @sam
+        padding-top: 0px; // reduced padding for better layout @cinewar
     }
 
     .welcome-card-column {
@@ -300,7 +300,7 @@ body.welcome-page {
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        max-width: 540px; // decreased max-width for better layout @sam
+        max-width: 540px; // decreased max-width for better layout @cinewar
         margin: auto;
 
         > div {
@@ -322,7 +322,7 @@ body.welcome-page {
         }
 
         &--blue {
-            background: rgba(0,0,0,0.24); // changed blue card background for better visibility @sam
+            background: rgba(0,0,0,0.24); // changed blue card background for better visibility @cinewar
         }
 
         &--grey {
