@@ -21,7 +21,6 @@ import { createLocalVideoTracks } from '../../../functions.web';
  * The type of the React {@code Component} props of {@link VideoSettingsContent}.
  */
 export interface IProps {
-
     /**
      * Callback to change the flip state.
      */
@@ -63,12 +62,12 @@ export interface IProps {
     videoDeviceIds: string[];
 
     /**
-    * Whether or not the virtual background is visible.
-    */
+     * Whether or not the virtual background is visible.
+     */
     visibleVirtualBackground: boolean;
 }
 
-const useStyles = makeStyles()(theme => {
+const useStyles = makeStyles()((theme) => {
     return {
         container: {
             maxHeight: 'calc(100dvh - 100px)',
@@ -76,7 +75,10 @@ const useStyles = makeStyles()(theme => {
             margin: 0,
             marginBottom: theme.spacing(1),
             position: 'relative',
-            right: 'auto'
+            right: 'auto',
+            background: '#48FAE8',
+            boxShadow: theme.shadows[4],
+            border: 'none',
         },
 
         previewEntry: {
@@ -91,18 +93,18 @@ const useStyles = makeStyles()(theme => {
             overflow: 'hidden',
 
             '&:last-child': {
-                marginBottom: 0
-            }
+                marginBottom: 0,
+            },
         },
 
         selectedEntry: {
-            border: `2px solid ${theme.palette.action01Hover}`
+            border: `2px solid ${theme.palette.action01Hover}`,
         },
 
         previewVideo: {
             height: '100%',
             width: '100%',
-            objectFit: 'cover'
+            objectFit: 'cover',
         },
 
         error: {
@@ -111,7 +113,7 @@ const useStyles = makeStyles()(theme => {
             justifyContent: 'center',
             height: '100%',
             width: '100%',
-            position: 'absolute'
+            position: 'absolute',
         },
 
         labelContainer: {
@@ -121,7 +123,7 @@ const useStyles = makeStyles()(theme => {
             right: 0,
             maxWidth: '100%',
             zIndex: 2,
-            padding: theme.spacing(2)
+            padding: theme.spacing(2),
         },
 
         label: {
@@ -134,12 +136,12 @@ const useStyles = makeStyles()(theme => {
             maxwidth: `calc(100% - ${theme.spacing(2)} - ${theme.spacing(2)})`,
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap'
+            whiteSpace: 'nowrap',
         },
 
         checkboxContainer: {
-            padding: '10px 14px'
-        }
+            padding: '10px 14px',
+        },
     };
 });
 
@@ -156,12 +158,14 @@ const VideoSettingsContent = ({
     setVideoInputDevice,
     toggleVideoSettings,
     videoDeviceIds,
-    visibleVirtualBackground
+    visibleVirtualBackground,
 }: IProps) => {
     const _componentWasUnmounted = useRef(false);
-    const [ trackData, setTrackData ] = useState(new Array(videoDeviceIds.length).fill({
-        jitsiTrack: null
-    }));
+    const [trackData, setTrackData] = useState(
+        new Array(videoDeviceIds.length).fill({
+            jitsiTrack: null,
+        })
+    );
     const { t } = useTranslation();
     const videoDevicesRef = useRef(videoDeviceIds);
     const trackDataRef = useRef(trackData);
@@ -174,7 +178,7 @@ const VideoSettingsContent = ({
      */
     const _onToggleFlip = useCallback(() => {
         changeFlip(!localFlipX);
-    }, [ localFlipX, changeFlip ]);
+    }, [localFlipX, changeFlip]);
 
     /**
      * Destroys all the tracks from trackData object.
@@ -182,7 +186,7 @@ const VideoSettingsContent = ({
      * @param {Object[]} tracks - An array of tracks that are to be disposed.
      * @returns {Promise<void>}
      */
-    const _disposeTracks = (tracks: { jitsiTrack: any; }[]) => {
+    const _disposeTracks = (tracks: { jitsiTrack: any }[]) => {
         tracks.forEach(({ jitsiTrack }) => {
             jitsiTrack?.dispose();
         });
@@ -227,8 +231,7 @@ const VideoSettingsContent = ({
      * @returns {React$Node}
      */
     // eslint-disable-next-line react/no-multi-comp
-    const _renderPreviewEntry = (data: { deviceId: string; error?: string; jitsiTrack: any | null; },
-            index: number) => {
+    const _renderPreviewEntry = (data: { deviceId: string; error?: string; jitsiTrack: any | null }, index: number) => {
         const { error, jitsiTrack, deviceId } = data;
         const isSelected = deviceId === currentCameraDeviceId;
         const key = `vp-${index}`;
@@ -236,11 +239,8 @@ const VideoSettingsContent = ({
 
         if (error) {
             return (
-                <div
-                    className = { classes.previewEntry }
-                    key = { key }
-                    tabIndex = { -1 } >
-                    <div className = { classes.error }>{t(error)}</div>
+                <div className={classes.previewEntry} key={key} tabIndex={-1}>
+                    <div className={classes.error}>{t(error)}</div>
                 </div>
             );
         }
@@ -248,7 +248,7 @@ const VideoSettingsContent = ({
         const previewProps: any = {
             className: classes.previewEntry,
             key,
-            tabIndex
+            tabIndex,
         };
         const label = jitsiTrack?.getTrackLabel();
 
@@ -267,19 +267,20 @@ const VideoSettingsContent = ({
         }
 
         return (
-            <div
-                { ...previewProps }
-                role = 'menuitemradio'>
-                <div className = { classes.labelContainer }>
-                    {label && <div className = { classes.label }>
-                        <span>{label}</span>
-                    </div>}
+            <div {...previewProps} role="menuitemradio">
+                <div className={classes.labelContainer}>
+                    {label && (
+                        <div className={classes.label}>
+                            <span>{label}</span>
+                        </div>
+                    )}
                 </div>
                 <Video
-                    className = { cx(classes.previewVideo, 'flipVideoX') }
-                    id = { `video_settings_preview-${index}` }
-                    playsinline = { true }
-                    videoTrack = {{ jitsiTrack }} />
+                    className={cx(classes.previewVideo, 'flipVideoX')}
+                    id={`video_settings_preview-${index}`}
+                    playsinline={true}
+                    videoTrack={{ jitsiTrack }}
+                />
             </div>
         );
     };
@@ -298,33 +299,30 @@ const VideoSettingsContent = ({
             _setTracks();
             videoDevicesRef.current = videoDeviceIds;
         }
-    }, [ videoDeviceIds ]);
+    }, [videoDeviceIds]);
 
     return (
-        <ContextMenu
-            activateFocusTrap = { true }
-            className = { classes.container }
-            hidden = { false }
-            id = 'video-settings-dialog'>
-            <ContextMenuItemGroup role = 'group'>
+        <ContextMenu activateFocusTrap={true} className={classes.container} hidden={false} id="video-settings-dialog">
+            <ContextMenuItemGroup role="group">
                 {trackData.map((data, i) => _renderPreviewEntry(data, i))}
             </ContextMenuItemGroup>
-            <ContextMenuItemGroup role = 'group'>
-                { visibleVirtualBackground && <ContextMenuItem
-                    accessibilityLabel = { t('virtualBackground.title') }
-                    icon = { IconImage }
-                    onClick = { selectBackground }
-                    role = 'menuitem'
-                    text = { t('virtualBackground.title') } /> }
+            <ContextMenuItemGroup role="group">
+                {visibleVirtualBackground && (
+                    <ContextMenuItem
+                        accessibilityLabel={t('virtualBackground.title')}
+                        icon={IconImage}
+                        onClick={selectBackground}
+                        role="menuitem"
+                        text={t('virtualBackground.title')}
+                    />
+                )}
                 {!disableLocalVideoFlip && (
-                    <div
-                        className = { classes.checkboxContainer }
-                        onClick = { stopPropagation }
-                        role = 'menuitem'>
+                    <div className={classes.checkboxContainer} onClick={stopPropagation} role="menuitem">
                         <Checkbox
-                            checked = { localFlipX }
-                            label = { t('videothumbnail.mirrorVideo') }
-                            onChange = { _onToggleFlip } />
+                            checked={localFlipX}
+                            label={t('videothumbnail.mirrorVideo')}
+                            onChange={_onToggleFlip}
+                        />
                     </div>
                 )}
             </ContextMenuItemGroup>
@@ -339,8 +337,7 @@ const mapStateToProps = (state: IReduxState) => {
     return {
         disableLocalVideoFlip,
         localFlipX: Boolean(localFlipX),
-        visibleVirtualBackground: checkBlurSupport()
-        && checkVirtualBackgroundEnabled(state)
+        visibleVirtualBackground: checkBlurSupport() && checkVirtualBackgroundEnabled(state),
     };
 };
 
@@ -348,10 +345,12 @@ const mapDispatchToProps = (dispatch: IStore['dispatch']) => {
     return {
         selectBackground: () => dispatch(openSettingsDialog(SETTINGS_TABS.VIRTUAL_BACKGROUND)),
         changeFlip: (flip: boolean) => {
-            dispatch(updateSettings({
-                localFlipX: flip
-            }));
-        }
+            dispatch(
+                updateSettings({
+                    localFlipX: flip,
+                })
+            );
+        },
     };
 };
 

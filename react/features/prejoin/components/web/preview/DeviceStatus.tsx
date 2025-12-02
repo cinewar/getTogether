@@ -4,23 +4,20 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from 'tss-react/mui';
 
 import { ColorPalette } from '../../../../base/styles/components/styles/ColorPalette';
-import {
-    getDeviceStatusText,
-    getDeviceStatusType
-} from '../../../functions';
+import { getDeviceStatusText, getDeviceStatusType } from '../../../functions';
 
-const useStyles = makeStyles<{ deviceStatusType?: string; }>()((theme, { deviceStatusType = 'pending' }) => {
+const useStyles = makeStyles<{ deviceStatusType?: string }>()((theme, { deviceStatusType = 'pending' }) => {
     return {
         deviceStatus: {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             ...theme.typography.bodyShortRegular,
-            color: '#fff',
+            color: '#000000', // Black text for better readability @cinewar
             marginTop: theme.spacing(4),
 
             '& span': {
-                marginLeft: theme.spacing(3)
+                marginLeft: theme.spacing(3),
             },
 
             '&.device-status-error': {
@@ -30,19 +27,20 @@ const useStyles = makeStyles<{ deviceStatusType?: string; }>()((theme, { deviceS
                 color: theme.palette.uiBackground,
                 padding: '12px 16px',
                 textAlign: 'left',
-                marginTop: theme.spacing(2)
+                marginTop: theme.spacing(2),
             },
 
             '@media (max-width: 720px)': {
-                marginTop: 0
-            }
+                marginTop: 0,
+            },
         },
         indicator: {
             width: '16px',
             height: '16px',
             borderRadius: '100%',
-            backgroundColor: deviceStatusType === 'ok' ? theme.palette.success01 : ColorPalette.darkGrey
-        }
+            border: '1px solid #000000', // Black border for better visibility @cinewar
+            backgroundColor: deviceStatusType === 'ok' ? theme.palette.success01 : ColorPalette.darkGrey,
+        },
     };
 });
 
@@ -61,14 +59,9 @@ function DeviceStatus() {
     const containerClassName = cx(classes.deviceStatus, { 'device-status-error': hasError });
 
     return (
-        <div
-            className = { containerClassName }
-            role = 'alert'
-            tabIndex = { -1 }>
-            {!hasError && <div className = { classes.indicator } />}
-            <span
-                aria-level = { 3 }
-                role = 'heading'>
+        <div className={containerClassName} role="alert" tabIndex={-1}>
+            {!hasError && <div className={classes.indicator} />}
+            <span aria-level={3} role="heading">
                 {hasError ? t('prejoin.errorNoPermissions') : t(deviceStatusText ?? '')}
             </span>
         </div>

@@ -25,14 +25,14 @@ import { isUnsafeRoomWarningEnabled } from '../../../prejoin/functions';
 import {
     joinConference as joinConferenceAction,
     joinConferenceWithoutAudio as joinConferenceWithoutAudioAction,
-    setJoinByPhoneDialogVisiblity as setJoinByPhoneDialogVisiblityAction
+    setJoinByPhoneDialogVisiblity as setJoinByPhoneDialogVisiblityAction,
 } from '../../actions.web';
 import {
     isDeviceStatusVisible,
     isDisplayNameRequired,
     isJoinByPhoneButtonVisible,
     isJoinByPhoneDialogVisible,
-    isPrejoinDisplayNameVisible
+    isPrejoinDisplayNameVisible,
 } from '../../functions';
 import logger from '../../logger';
 import { hasDisplayName } from '../../utils';
@@ -40,7 +40,6 @@ import { hasDisplayName } from '../../utils';
 import JoinByPhoneDialog from './dialogs/JoinByPhoneDialog';
 
 interface IProps {
-
     /**
      * Flag signaling if the device status is visible or not.
      */
@@ -137,10 +136,10 @@ interface IProps {
     videoTrack?: Object;
 }
 
-const useStyles = makeStyles()(theme => {
+const useStyles = makeStyles()((theme) => {
     return {
         inputContainer: {
-            width: '100%'
+            width: '100%',
         },
 
         input: {
@@ -148,25 +147,25 @@ const useStyles = makeStyles()(theme => {
             marginBottom: theme.spacing(3),
 
             '& input': {
-                textAlign: 'center'
-            }
+                textAlign: 'center',
+            },
         },
 
         avatarContainer: {
             display: 'flex',
             alignItems: 'center',
-            flexDirection: 'column'
+            flexDirection: 'column',
         },
 
         avatar: {
-            margin: `${theme.spacing(2)} auto ${theme.spacing(3)}`
+            margin: `${theme.spacing(2)} auto ${theme.spacing(3)}`,
         },
 
         avatarName: {
             ...theme.typography.bodyShortBoldLarge,
             color: theme.palette.text01,
             marginBottom: theme.spacing(5),
-            textAlign: 'center'
+            textAlign: 'center',
         },
 
         error: {
@@ -179,12 +178,12 @@ const useStyles = makeStyles()(theme => {
             padding: theme.spacing(1),
             textAlign: 'center',
             marginTop: `-${theme.spacing(2)}`,
-            marginBottom: theme.spacing(3)
+            marginBottom: theme.spacing(3),
         },
 
         dropdownContainer: {
             position: 'relative',
-            width: '100%'
+            width: '100%',
         },
 
         dropdownButtons: {
@@ -198,14 +197,14 @@ const useStyles = makeStyles()(theme => {
 
             '@media (max-width: 511px)': {
                 margin: '0 auto',
-                top: 0
+                top: 0,
             },
 
             '@media (max-width: 420px)': {
                 top: 0,
-                width: 'calc(100% - 32px)'
-            }
-        }
+                width: 'calc(100% - 32px)',
+            },
+        },
     };
 });
 
@@ -228,15 +227,17 @@ const Prejoin = ({
     showUnsafeRoomWarning,
     unsafeRoomConsent,
     updateSettings: dispatchUpdateSettings,
-    videoTrack
+    videoTrack,
 }: IProps) => {
     const showDisplayNameField = useMemo(
         () => isDisplayNameVisible && !readOnlyName,
-        [ isDisplayNameVisible, readOnlyName ]);
+        [isDisplayNameVisible, readOnlyName]
+    );
     const showErrorOnField = useMemo(
         () => showDisplayNameField && showErrorOnJoin,
-        [ showDisplayNameField, showErrorOnJoin ]);
-    const [ showJoinByPhoneButtons, setShowJoinByPhoneButtons ] = useState(false);
+        [showDisplayNameField, showErrorOnJoin]
+    );
+    const [showJoinByPhoneButtons, setShowJoinByPhoneButtons] = useState(false);
     const { classes } = useStyles();
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -249,10 +250,12 @@ const Prejoin = ({
      */
     const onJoinButtonClick = () => {
         if (showErrorOnJoin) {
-            dispatch(openDisplayNamePrompt({
-                onPostSubmit: joinConference,
-                validateInput: hasDisplayName
-            }));
+            dispatch(
+                openDisplayNamePrompt({
+                    onPostSubmit: joinConference,
+                    validateInput: hasDisplayName,
+                })
+            );
 
             return;
         }
@@ -280,7 +283,7 @@ const Prejoin = ({
     const onOptionsClick = (e?: React.KeyboardEvent | React.MouseEvent | undefined) => {
         e?.stopPropagation();
 
-        setShowJoinByPhoneButtons(show => !show);
+        setShowJoinByPhoneButtons((show) => !show);
     };
 
     /**
@@ -291,7 +294,7 @@ const Prejoin = ({
      */
     const setName = (displayName: string) => {
         dispatchUpdateSettings({
-            displayName
+            displayName,
         });
     };
 
@@ -336,9 +339,7 @@ const Prejoin = ({
      * @returns {void}
      */
     const onJoinConferenceWithoutAudioKeyPress = (e: React.KeyboardEvent) => {
-        if (joinConferenceWithoutAudio
-            && (e.key === ' '
-                || e.key === 'Enter')) {
+        if (joinConferenceWithoutAudio && (e.key === ' ' || e.key === 'Enter')) {
             e.preventDefault();
             logger.info('Prejoin joinConferenceWithoutAudio dispatched on a key pressed.');
             joinConferenceWithoutAudio();
@@ -360,7 +361,7 @@ const Prejoin = ({
                 logger.info('Prejoin join conference without audio pressed.');
                 joinConferenceWithoutAudio();
             },
-            onKeyPress: onJoinConferenceWithoutAudioKeyPress
+            onKeyPress: onJoinConferenceWithoutAudioKeyPress,
         };
 
         const byPhone = {
@@ -369,12 +370,12 @@ const Prejoin = ({
             icon: IconPhoneRinging,
             label: t('prejoin.joinAudioByPhone'),
             onClick: doShowDialog,
-            onKeyPress: showDialogKeyPress
+            onKeyPress: showDialogKeyPress,
         };
 
         return {
             noAudio,
-            byPhone
+            byPhone,
         };
     };
 
@@ -392,8 +393,8 @@ const Prejoin = ({
     };
 
     const extraJoinButtons = getExtraJoinButtons();
-    let extraButtonsToRender = Object.values(extraJoinButtons).filter((val: any) =>
-        !(prejoinConfig?.hideExtraJoinButtons || []).includes(val.key)
+    let extraButtonsToRender = Object.values(extraJoinButtons).filter(
+        (val: any) => !(prejoinConfig?.hideExtraJoinButtons || []).includes(val.key)
     );
 
     if (!hasJoinByPhoneButton) {
@@ -403,91 +404,90 @@ const Prejoin = ({
 
     return (
         <PreMeetingScreen
-            showDeviceStatus = { deviceStatusVisible }
-            showRecordingWarning = { showRecordingWarning }
-            showUnsafeRoomWarning = { showUnsafeRoomWarning }
-            title = { t('prejoin.joinMeeting') }
-            videoMuted = { !showCameraPreview }
-            videoTrack = { videoTrack }>
-            <div
-                className = { classes.inputContainer }
-                data-testid = 'prejoin.screen'>
-                {showDisplayNameField ? (<Input
-                    accessibilityLabel = { t('dialog.enterDisplayName') }
-                    autoComplete = { 'name' }
-                    autoFocus = { true }
-                    className = { classes.input }
-                    error = { showErrorOnField }
-                    id = 'premeeting-name-input'
-                    onChange = { setName }
-                    onKeyPress = { showUnsafeRoomWarning && !unsafeRoomConsent ? undefined : onInputKeyPress }
-                    placeholder = { t('dialog.enterDisplayName') }
-                    readOnly = { readOnlyName }
-                    value = { name } />
+            showDeviceStatus={deviceStatusVisible}
+            showRecordingWarning={showRecordingWarning}
+            showUnsafeRoomWarning={showUnsafeRoomWarning}
+            title={t('prejoin.joinMeeting')}
+            videoMuted={!showCameraPreview}
+            videoTrack={videoTrack}
+        >
+            <div className={classes.inputContainer} data-testid="prejoin.screen">
+                {showDisplayNameField ? (
+                    <Input
+                        accessibilityLabel={t('dialog.enterDisplayName')}
+                        autoComplete={'name'}
+                        autoFocus={true}
+                        className={classes.input}
+                        error={showErrorOnField}
+                        id="premeeting-name-input"
+                        onChange={setName}
+                        onKeyPress={showUnsafeRoomWarning && !unsafeRoomConsent ? undefined : onInputKeyPress}
+                        placeholder={t('dialog.enterDisplayName')}
+                        readOnly={readOnlyName}
+                        value={name}
+                    />
                 ) : (
-                    <div className = { classes.avatarContainer }>
-                        <Avatar
-                            className = { classes.avatar }
-                            displayName = { name }
-                            participantId = { participantId }
-                            size = { 72 } />
-                        {isDisplayNameVisible && <div className = { classes.avatarName }>{name}</div>}
+                    <div className={classes.avatarContainer}>
+                        <Avatar className={classes.avatar} displayName={name} participantId={participantId} size={72} />
+                        {isDisplayNameVisible && <div className={classes.avatarName}>{name}</div>}
                     </div>
                 )}
 
-                {showErrorOnField && <div
-                    className = { classes.error }
-                    data-testid = 'prejoin.errorMessage'>
-                    <p aria-live = 'polite' >
-                        {t('prejoin.errorMissingName')}
-                    </p>
-                </div>}
+                {showErrorOnField && (
+                    <div className={classes.error} data-testid="prejoin.errorMessage">
+                        <p aria-live="polite">{t('prejoin.errorMissingName')}</p>
+                    </div>
+                )}
 
-                <div className = { classes.dropdownContainer }>
+                <div className={classes.dropdownContainer}>
                     <Popover
-                        content = { hasExtraJoinButtons && <div className = { classes.dropdownButtons }>
-                            {extraButtonsToRender.map(({ key, ...rest }) => (
-                                <Button
-                                    disabled = { joiningInProgress || showErrorOnField }
-                                    fullWidth = { true }
-                                    key = { key }
-                                    type = { BUTTON_TYPES.SECONDARY }
-                                    { ...rest } />
-                            ))}
-                        </div> }
-                        onPopoverClose = { onDropdownClose }
-                        position = 'bottom'
-                        trigger = 'click'
-                        visible = { showJoinByPhoneButtons }>
+                        content={
+                            hasExtraJoinButtons && (
+                                <div className={classes.dropdownButtons}>
+                                    {extraButtonsToRender.map(({ key, ...rest }) => (
+                                        <Button
+                                            disabled={joiningInProgress || showErrorOnField}
+                                            fullWidth={true}
+                                            key={key}
+                                            type={BUTTON_TYPES.SECONDARY}
+                                            {...rest}
+                                        />
+                                    ))}
+                                </div>
+                            )
+                        }
+                        onPopoverClose={onDropdownClose}
+                        position="bottom"
+                        trigger="click"
+                        visible={showJoinByPhoneButtons}
+                    >
                         <ActionButton
-                            OptionsIcon = { showJoinByPhoneButtons ? IconArrowUp : IconArrowDown }
-                            ariaDropDownLabel = { t('prejoin.joinWithoutAudio') }
-                            ariaLabel = { t('prejoin.joinMeeting') }
-                            ariaPressed = { showJoinByPhoneButtons }
-                            disabled = { joiningInProgress
-                                || (showUnsafeRoomWarning && !unsafeRoomConsent)
-                                || showErrorOnField }
-                            hasOptions = { hasExtraJoinButtons }
-                            onClick = { onJoinButtonClick }
-                            onOptionsClick = { onOptionsClick }
-                            role = 'button'
-                            tabIndex = { 0 }
-                            testId = 'prejoin.joinMeeting'
-                            type = 'primary'>
+                            OptionsIcon={showJoinByPhoneButtons ? IconArrowUp : IconArrowDown}
+                            ariaDropDownLabel={t('prejoin.joinWithoutAudio')}
+                            ariaLabel={t('prejoin.joinMeeting')}
+                            ariaPressed={showJoinByPhoneButtons}
+                            disabled={
+                                joiningInProgress || (showUnsafeRoomWarning && !unsafeRoomConsent) || showErrorOnField
+                            }
+                            hasOptions={hasExtraJoinButtons}
+                            onClick={onJoinButtonClick}
+                            onOptionsClick={onOptionsClick}
+                            role="button"
+                            tabIndex={0}
+                            testId="prejoin.joinMeeting"
+                            type="primary"
+                        >
                             {t('prejoin.joinMeeting')}
                         </ActionButton>
                     </Popover>
                 </div>
             </div>
             {showDialog && (
-                <JoinByPhoneDialog
-                    joinConferenceWithoutAudio = { joinConferenceWithoutAudio }
-                    onClose = { closeDialog } />
+                <JoinByPhoneDialog joinConferenceWithoutAudio={joinConferenceWithoutAudio} onClose={closeDialog} />
             )}
         </PreMeetingScreen>
     );
 };
-
 
 /**
  * Maps (parts of) the redux state to the React {@code Component} props.
@@ -519,7 +519,7 @@ function mapStateToProps(state: IReduxState) {
         showRecordingWarning: Boolean(showRecordingWarning),
         showUnsafeRoomWarning: isInsecureRoomName(room) && isUnsafeRoomWarningEnabled(state),
         unsafeRoomConsent,
-        videoTrack: getLocalJitsiVideoTrack(state)
+        videoTrack: getLocalJitsiVideoTrack(state),
     };
 }
 
@@ -527,7 +527,7 @@ const mapDispatchToProps = {
     joinConferenceWithoutAudio: joinConferenceWithoutAudioAction,
     joinConference: joinConferenceAction,
     setJoinByPhoneDialogVisiblity: setJoinByPhoneDialogVisiblityAction,
-    updateSettings
+    updateSettings,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Prejoin);

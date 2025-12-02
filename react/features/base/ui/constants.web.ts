@@ -232,7 +232,10 @@ export const commonStyles = (theme: Theme) => {
             },
 
             '&.toggled': {
-                backgroundColor: theme.palette.ui03,
+                backgroundColor: 'transparent', // changed to transparent @cinewar
+                '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.24)' /* hover color changed for better usability @cinewar */,
+                },
             },
 
             '&.disabled': {

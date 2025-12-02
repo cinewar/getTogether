@@ -20,7 +20,6 @@ import RecordingWarning from './RecordingWarning';
 import UnsafeRoomWarning from './UnsafeRoomWarning';
 
 interface IProps {
-
     /**
      * The list of toolbar buttons to render.
      */
@@ -102,19 +101,19 @@ interface IProps {
     videoTrack?: Object;
 }
 
-const useStyles = makeStyles()(theme => {
+const useStyles = makeStyles()((theme) => {
     return {
         container: {
             height: '100%',
             position: 'absolute',
             inset: '0 0 0 0',
             display: 'flex',
-            backgroundColor: theme.palette.ui01,
+            backgroundColor: '#48FAE8',
             zIndex: 252,
 
             '@media (max-width: 720px)': {
-                flexDirection: 'column-reverse'
-            }
+                flexDirection: 'column-reverse',
+            },
         },
         content: {
             display: 'flex',
@@ -122,7 +121,7 @@ const useStyles = makeStyles()(theme => {
             alignItems: 'center',
             flexShrink: 0,
             boxSizing: 'border-box',
-            padding: '24px 0 16px',
+            padding: '0px 0 16px',
             position: 'relative',
             width: '400px',
             height: '100%',
@@ -130,62 +129,69 @@ const useStyles = makeStyles()(theme => {
 
             '@media (max-width: 720px)': {
                 height: 'auto',
-                margin: '0 auto'
+                margin: '0 auto',
             },
 
             // mobile phone landscape
             '@media (max-width: 420px)': {
                 padding: '16px 16px 0 16px',
-                width: '100%'
+                width: '100%',
             },
 
             '@media (max-width: 400px)': {
-                padding: '16px'
-            }
+                padding: '16px',
+            },
+        },
+        // temp fix for premeeting background @cinewar
+        headerBackground: {
+            width: '100%',
+            height: '100px',
+            background: 'linear-gradient(180deg, #111 0%, #48FAE8 100%)', // temp fix for premeeting background @cinewar
+            overflow: 'hidden', // temp fix for premeeting background @cinewar
         },
         contentControls: {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'stretch',
             margin: 'auto',
-            width: '100%'
+            width: '100%',
         },
         paddedContent: {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            padding: '0 50px',
+            padding: '0 30px', // adjusted padding @cinewar
 
             '& > *': {
                 width: '100%',
-                boxSizing: 'border-box'
-            }
+                boxSizing: 'border-box',
+            },
         },
         title: {
             ...theme.typography.heading4,
-            color: `${theme.palette.text01}!important`,
+            color: '#000000', // color changed to black @cinewar
             marginBottom: theme.spacing(3),
             textAlign: 'center',
 
             '@media (max-width: 400px)': {
-                display: 'none'
-            }
+                display: 'none',
+            },
         },
         roomNameContainer: {
             width: '100%',
             textAlign: 'center',
-            marginBottom: theme.spacing(4)
+            marginBottom: theme.spacing(4),
         },
 
         roomName: {
             ...theme.typography.heading5,
-            color: theme.palette.text01,
+            color: '#000000', // color changed to black @cinewar
             display: 'inline-block',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
             maxWidth: '100%',
-        }
+        },
     };
 });
 
@@ -202,17 +208,19 @@ const PreMeetingScreen = ({
     skipPrejoinButton,
     title,
     videoMuted,
-    videoTrack
+    videoTrack,
 }: IProps) => {
     const { classes } = useStyles();
-    const style = _premeetingBackground ? {
-        background: _premeetingBackground,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover'
-    } : {};
+    const style = _premeetingBackground
+        ? {
+              background: _premeetingBackground,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+          }
+        : {};
 
     const roomNameRef = useRef<HTMLSpanElement | null>(null);
-    const [ isOverflowing, setIsOverflowing ] = useState(false);
+    const [isOverflowing, setIsOverflowing] = useState(false);
 
     useEffect(() => {
         if (roomNameRef.current) {
@@ -222,33 +230,27 @@ const PreMeetingScreen = ({
 
             setIsOverflowing(element.scrollWidth > elementWidth + 1);
         }
-    }, [ _roomName ]);
+    }, [_roomName]);
 
     return (
-        <div className = { clsx('premeeting-screen', classes.container, className) }>
-            <div style = { style }>
-                <div className = { classes.content }>
+        <div className={clsx('premeeting-screen', classes.container, className)}>
+            <div style={style}>
+                <div className={classes.content}>
                     {_isPreCallTestEnabled && <ConnectionStatus />}
-
-                    <div className = { classes.contentControls }>
-                        <div className = { classes.paddedContent }>
-                            <h1 className = { classes.title }>
-                                {title}
-                            </h1>
+                    <div className={classes.headerBackground}></div>
+                    <div className={classes.contentControls}>
+                        <div className={classes.paddedContent}>
+                            <h1 className={classes.title}>{title}</h1>
                             {_roomName && (
-                                <span className = { classes.roomNameContainer }>
+                                <span className={classes.roomNameContainer}>
                                     {isOverflowing ? (
-                                        <Tooltip content = { _roomName }>
-                                            <span
-                                                className = { classes.roomName }
-                                                ref = { roomNameRef }>
+                                        <Tooltip content={_roomName}>
+                                            <span className={classes.roomName} ref={roomNameRef}>
                                                 {_roomName}
                                             </span>
                                         </Tooltip>
                                     ) : (
-                                        <span
-                                            className = { classes.roomName }
-                                            ref = { roomNameRef }>
+                                        <span className={classes.roomName} ref={roomNameRef}>
                                             {_roomName}
                                         </span>
                                     )}
@@ -256,8 +258,8 @@ const PreMeetingScreen = ({
                             )}
                             {children}
                         </div>
-                        {_buttons.length && <Toolbox toolbarButtons = { _buttons } />}
-                        <div className = { classes.paddedContent }>
+                        {_buttons.length && <Toolbox toolbarButtons={_buttons} />}
+                        <div className={classes.paddedContent}>
                             {skipPrejoinButton}
                             {showUnsafeRoomWarning && <UnsafeRoomWarning />}
                             {showDeviceStatus && <DeviceStatus />}
@@ -266,13 +268,10 @@ const PreMeetingScreen = ({
                     </div>
                 </div>
             </div>
-            <Preview
-                videoMuted = { videoMuted }
-                videoTrack = { videoTrack } />
+            <Preview videoMuted={videoMuted} videoTrack={videoTrack} />
         </div>
     );
 };
-
 
 /**
  * Maps (parts of) the redux state to the React {@code Component} props.
@@ -287,9 +286,9 @@ function mapStateToProps(state: IReduxState, ownProps: Partial<IProps>) {
     const { knocking } = state['features/lobby'];
     const { showHangUp: showHangUpLobby = true } = getLobbyConfig(state);
     const { showHangUp: showHangUpPrejoin = true } = prejoinConfig || {};
-    const premeetingButtons = (ownProps.thirdParty
-        ? THIRD_PARTY_PREJOIN_BUTTONS
-        : PREMEETING_BUTTONS).filter((b: any) => !(hiddenPremeetingButtons || []).includes(b));
+    const premeetingButtons = (ownProps.thirdParty ? THIRD_PARTY_PREJOIN_BUTTONS : PREMEETING_BUTTONS).filter(
+        (b: any) => !(hiddenPremeetingButtons || []).includes(b)
+    );
 
     const shouldShowHangUp = knocking ? showHangUpLobby : showHangUpPrejoin;
 
@@ -307,12 +306,11 @@ function mapStateToProps(state: IReduxState, ownProps: Partial<IProps>) {
         // toolbarButtons config overwrite.
         _buttons: hiddenPremeetingButtons
             ? premeetingButtons
-            : premeetingButtons.filter(b => isButtonEnabled(b, toolbarButtons)),
+            : premeetingButtons.filter((b) => isButtonEnabled(b, toolbarButtons)),
         _isPreCallTestEnabled: isPreCallTestEnabled(state),
         _premeetingBackground: premeetingBackground,
-        _roomName: isRoomNameEnabled(state) ? getConferenceName(state) : ''
+        _roomName: isRoomNameEnabled(state) ? getConferenceName(state) : '',
     };
 }
 
 export default connect(mapStateToProps)(PreMeetingScreen);
-

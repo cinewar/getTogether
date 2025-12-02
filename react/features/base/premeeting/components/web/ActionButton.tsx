@@ -5,7 +5,6 @@ import Icon from '../../../icons/components/Icon';
 import { IconArrowDown } from '../../../icons/svg';
 
 interface IProps {
-
     /**
      * Icon to display in the options section.
      */
@@ -46,7 +45,6 @@ interface IProps {
      */
     hasOptions?: boolean;
 
-
     /**
      * OnClick button handler.
      */
@@ -78,7 +76,7 @@ interface IProps {
     type: string;
 }
 
-const useStyles = makeStyles()(theme => {
+const useStyles = makeStyles()((theme) => {
     return {
         actionButton: {
             ...theme.typography.bodyLongBold,
@@ -88,19 +86,24 @@ const useStyles = makeStyles()(theme => {
             cursor: 'pointer',
             display: 'inline-block',
             marginBottom: '16px',
-            padding: '7px 16px',
+            padding: '10px 16px', // adjusted padding @cinewar
             position: 'relative' as const,
             textAlign: 'center',
             width: '100%',
             border: 0,
 
             '&.primary': {
-                background: theme.palette.action01,
-                color: theme.palette.text01,
+                background: '#E631FA', // changed to purple @cinewar
+                color: '#000000', // changed to black @cinewar
 
                 '&:hover': {
-                    backgroundColor: theme.palette.action01Hover
-                }
+                    backgroundColor: 'rgba(0,0,0,0.24)', // changed to black hover @cinewar
+                },
+                '& svg': {
+                    pointerEvents: 'none',
+                    width: '24px', // adjusted size @cinewar
+                    height: '24px', // adjusted size @cinewar
+                },
             },
 
             '&.secondary': {
@@ -108,15 +111,15 @@ const useStyles = makeStyles()(theme => {
                 color: theme.palette.text04,
 
                 '&:hover': {
-                    backgroundColor: theme.palette.action02Hover
-                }
+                    backgroundColor: theme.palette.action02Hover,
+                },
             },
 
             '&.text': {
                 width: 'auto',
                 fontSize: '0.875rem',
                 margin: '0',
-                padding: '0'
+                padding: '0',
             },
 
             '&.disabled': {
@@ -127,17 +130,16 @@ const useStyles = makeStyles()(theme => {
 
                 '.icon': {
                     '& > svg': {
-                        fill: '#AFB6BC'
-                    }
-                }
+                        fill: '#AFB6BC',
+                    },
+                },
             },
-
 
             [theme.breakpoints.down(400)]: {
                 fontSize: '1rem',
                 marginBottom: 8,
-                padding: '11px 16px'
-            }
+                padding: '11px 16px',
+            },
         },
         options: {
             borderRadius: Number(theme.shape.borderRadius) / 2,
@@ -151,13 +153,13 @@ const useStyles = makeStyles()(theme => {
             width: 36,
 
             '&:hover': {
-                backgroundColor: '#0262B6'
+                backgroundColor: '#0262B6',
             },
 
             '& svg': {
-                pointerEvents: 'none'
-            }
-        }
+                pointerEvents: 'none',
+            },
+        },
     };
 });
 
@@ -180,61 +182,61 @@ function ActionButton({
     role,
     ariaPressed,
     ariaLabel,
-    ariaDropDownLabel
+    ariaDropDownLabel,
 }: IProps) {
     const { classes, cx } = useStyles();
 
-    const onKeyPressHandler = useCallback(e => {
-        if (onClick && !disabled && (e.key === ' ' || e.key === 'Enter')) {
-            e.preventDefault();
-            onClick(e);
-        }
-    }, [ onClick, disabled ]);
-
-    const onOptionsKeyPressHandler = useCallback(e => {
-        if (onOptionsClick && !disabled && (e.key === ' ' || e.key === 'Enter')) {
-            e.preventDefault();
-            e.stopPropagation();
-            onOptionsClick(e);
-        }
-    }, [ onOptionsClick, disabled ]);
-
-    const containerClasses = cx(
-        classes.actionButton,
-        className && className,
-        type,
-        disabled && 'disabled'
+    const onKeyPressHandler = useCallback(
+        (e) => {
+            if (onClick && !disabled && (e.key === ' ' || e.key === 'Enter')) {
+                e.preventDefault();
+                onClick(e);
+            }
+        },
+        [onClick, disabled]
     );
+
+    const onOptionsKeyPressHandler = useCallback(
+        (e) => {
+            if (onOptionsClick && !disabled && (e.key === ' ' || e.key === 'Enter')) {
+                e.preventDefault();
+                e.stopPropagation();
+                onOptionsClick(e);
+            }
+        },
+        [onOptionsClick, disabled]
+    );
+
+    const containerClasses = cx(classes.actionButton, className && className, type, disabled && 'disabled');
 
     return (
         <div
-            aria-disabled = { disabled }
-            aria-label = { ariaLabel }
-            className = { containerClasses }
-            data-testid = { testId ? testId : undefined }
-            onClick = { disabled ? undefined : onClick }
-            onKeyPress = { onKeyPressHandler }
-            role = 'button'
-            tabIndex = { 0 } >
+            aria-disabled={disabled}
+            aria-label={ariaLabel}
+            className={containerClasses}
+            data-testid={testId ? testId : undefined}
+            onClick={disabled ? undefined : onClick}
+            onKeyPress={onKeyPressHandler}
+            role="button"
+            tabIndex={0}
+        >
             {children}
-            { hasOptions
-                && <div
-                    aria-disabled = { disabled }
-                    aria-haspopup = 'true'
-                    aria-label = { ariaDropDownLabel }
-                    aria-pressed = { ariaPressed }
-                    className = { classes.options }
-                    data-testid = 'prejoin.joinOptions'
-                    onClick = { disabled ? undefined : onOptionsClick }
-                    onKeyPress = { onOptionsKeyPressHandler }
-                    role = { role }
-                    tabIndex = { tabIndex }>
-                    <Icon
-                        className = 'icon'
-                        size = { 24 }
-                        src = { OptionsIcon } />
+            {hasOptions && (
+                <div
+                    aria-disabled={disabled}
+                    aria-haspopup="true"
+                    aria-label={ariaDropDownLabel}
+                    aria-pressed={ariaPressed}
+                    className={classes.options}
+                    data-testid="prejoin.joinOptions"
+                    onClick={disabled ? undefined : onOptionsClick}
+                    onKeyPress={onOptionsKeyPressHandler}
+                    role={role}
+                    tabIndex={tabIndex}
+                >
+                    <Icon className="icon" size={24} src={OptionsIcon} />
                 </div>
-            }
+            )}
         </div>
     );
 }
