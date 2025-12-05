@@ -83,7 +83,9 @@ const useStyles = makeStyles<{ overflowDrawer: boolean; reactionsMenuHeight: num
             maxHeight: overflowDrawer ? undefined : 'calc(100dvh - 100px)',
             paddingBottom: overflowDrawer ? undefined : 0,
             minWidth: '240px',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            background: '#48FAE8', // temp color to identify toolbar area @cinewar
+            border: 'none' // temp border removal to identify toolbar area @cinewar
         },
         content: {
             position: 'relative',

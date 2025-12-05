@@ -88,6 +88,8 @@
 
     .toolbox-content-items {
         @include ltr;
+        background: #48FAE8; // temp color to identify toolbar area @cinewar
+        width: 90vw; // temp color to identify toolbar area @cinewar
     }
 }
 

@@ -55,6 +55,9 @@ const useStyles = makeStyles()((theme) => {
             objectFit: 'cover',
             textAlign: 'center',
             overflow: 'hidden',
+            height: '40px !important', // size changed for design @cinewar
+            width: '40px !important', // size changed for design @cinewar
+            border: '1px solid #FFFFFF', // design for avatar initials bg @cinewar
 
             '&.avatar-small': {
                 height: '28px !important',
@@ -82,7 +85,9 @@ const useStyles = makeStyles()((theme) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            color: '#E631FA', // changed for better view @cinewar
+            color: '#000', // design for avatar initials bg @cinewar
+            background: '#E631FA', // design for avatar initials bg @cinewar
+            fontSize: '1.25rem', // adjust font size for initials @cinewar
         },
 
         badge: {
