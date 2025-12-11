@@ -56,6 +56,13 @@
 
 .chat-input-container {
     padding: 0 16px 24px;
+    button:hover {
+        background-color: rgba(0,0,0,0.24);
+    }
+    svg {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 #chat-input {

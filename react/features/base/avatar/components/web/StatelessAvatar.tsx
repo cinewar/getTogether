@@ -13,6 +13,8 @@ interface IProps extends IAvatarProps {
      */
     className?: string;
 
+    customBg?: string; //* Added to pass custom styles */
+
     /**
      * The default avatar URL if we want to override the app bundled one (e.g. AlwaysOnTop).
      */
@@ -125,6 +127,7 @@ const useStyles = makeStyles()((theme) => {
 const StatelessAvatar = ({
     className,
     color,
+    customBg,
     iconUser,
     id,
     initials,
@@ -140,10 +143,12 @@ const StatelessAvatar = ({
 
     const _getAvatarStyle = (backgroundColor?: string) => {
         return {
-            background: backgroundColor || undefined,
-            fontSize: size ? pixelsToRem(size * 0.4) : '180%',
-            height: size || '100%',
-            width: size || '100%',
+            ...{
+                background: customBg || backgroundColor || undefined,
+                fontSize: size ? pixelsToRem(size * 0.4) : '180%',
+                height: size || '100%',
+                width: size || '100%',
+            },
         };
     };
 
@@ -201,7 +206,9 @@ const StatelessAvatar = ({
                 id={id}
                 style={_getAvatarStyle(color)}
             >
-                <div className={classes.initialsContainer}>{initials}</div>
+                <div
+                    className = { classes.initialsContainer }
+                    style = {{ background: customBg }} >{initials}</div>
             </div>
         );
     }

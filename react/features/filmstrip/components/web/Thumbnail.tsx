@@ -282,7 +282,7 @@ const defaultStyles = (theme: Theme) => {
         },
 
         indicatorsBackground: {
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            backgroundColor: 'rgba(0, 0, 0, 0.24)', // changed regarding new design @cinewar
             borderRadius: '4px',
             display: 'flex',
             alignItems: 'center',
@@ -322,8 +322,9 @@ const defaultStyles = (theme: Theme) => {
         },
 
         activeSpeaker: {
+            border: '2px solid #E631FA !important', // temporary change to match design @cinewar active speaker
             '& .active-speaker-indicator': {
-                boxShadow: `inset 0px 0px 0px 3px ${theme.palette.action01Hover} !important`
+                // boxShadow: `inset 0px 0px 0px 3px ${theme.palette.action01Hover} !important`
             }
         },
 

@@ -67,7 +67,7 @@ function styles(theme: Theme, props: IProps) {
             flexWrap: 'nowrap' as const,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: BACKGROUND_COLOR,
+            backgroundColor: 'transparent', // bright cyan for visibility @cinewar
             width: '32px',
             height: '24px',
             position: 'absolute' as const,
@@ -87,16 +87,19 @@ function styles(theme: Theme, props: IProps) {
             fontSize: '0.875rem',
             lineHeight: 1.2,
             textAlign: 'center' as const,
-            background: 'transparent',
+            background: '#48FDEA', // bright cyan for visibility @cinewar
             height: 'auto',
             width: '100%',
-            padding: 0,
+            padding: '7px', // increased padding for easier touch target @cinewar
             margin: 0,
             border: 'none',
+            opacity: 0.65, // slightly less prominent @cinewar
 
             '-webkit-appearance': 'none',
 
             '& svg': {
+                width: '20px !important', // increased size for visibility @cinewar
+                height: '20px !important', // increased size for visibility @cinewar
                 fill: theme.palette.icon01
             }
         },
@@ -195,6 +198,7 @@ function styles(theme: Theme, props: IProps) {
             alignItems: 'center',
             justifyContent: 'center',
             visibility: 'hidden' as const,
+            borderLeft: '1px solid #E631FA', // bright magenta for visibility @cinewar
 
             '&:hover': {
                 '& .dragHandle': {
@@ -224,10 +228,11 @@ function styles(theme: Theme, props: IProps) {
         },
 
         dragHandle: {
-            backgroundColor: theme.palette.icon02,
+            backgroundColor: '#48FDEA', // bright cyan for visibility @cinewar
             height: '100px',
             width: '3px',
-            borderRadius: '1px'
+            borderRadius: '1px',
+            opacity: 0.65 // slightly less prominent @cinewar
         }
     };
 

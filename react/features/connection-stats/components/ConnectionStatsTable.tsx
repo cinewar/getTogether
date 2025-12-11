@@ -222,6 +222,7 @@ const useStyles = makeStyles()(theme => {
         },
         connectionStatsTable: {
             '&, & > table': {
+                color: '#000000', // Temporary fix for context menu flash issue @cinewar
                 fontSize: '0.75rem',
                 fontWeight: 400,
 

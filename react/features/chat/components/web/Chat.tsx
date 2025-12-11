@@ -102,7 +102,7 @@ interface IProps extends AbstractProps {
 const useStyles = makeStyles<{ _isResizing: boolean; width: number; }>()((theme, { _isResizing, width }) => {
     return {
         container: {
-            backgroundColor: theme.palette.ui01,
+            backgroundColor: '#B2F1EA', // changed regarding new design @cinewar
             flexShrink: 0,
             overflow: 'hidden',
             position: 'relative',
@@ -212,8 +212,12 @@ const useStyles = makeStyles<{ _isResizing: boolean; width: number; }>()((theme,
         },
 
         privateMessageRecipientsList: {
-            padding: '0 16px 5px'
-        }
+            padding: '0 16px 5px',
+            select: {
+                backgroundColor: '#E631FA', // changed for better view @cinewar
+                borderRadius: '7px', // changed for better view @cinewar
+            }
+        },
     };
 });
 

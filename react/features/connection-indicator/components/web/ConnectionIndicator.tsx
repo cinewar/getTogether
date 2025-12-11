@@ -163,7 +163,7 @@ const styles = (theme: Theme) => {
             borderRadius: '4px',
 
             '&.status-high': {
-                backgroundColor: theme.palette.success01
+                backgroundColor: 'theme.palette.success01'
             },
 
             '&.status-med': {

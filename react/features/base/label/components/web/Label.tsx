@@ -68,6 +68,9 @@ const useStyles = makeStyles()((theme) => {
         },
         clickable: {
             cursor: 'pointer',
+            '&:hover': {
+                background: 'rgba(0,0,0,0.24)', // changed regarding new design @cinewar
+            },
         },
         [COLORS.white]: {
             background: theme.palette.ui09,

@@ -10,9 +10,10 @@ const useStyles = makeStyles()(theme => {
     return {
         container: {
             ...theme.typography.bodyLongRegular,
-            color: theme.palette.text01,
+            color: '#000000', // changed regarding new design @cinewar
             padding: '2px 16px',
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            backgroundColor: '#48FDEA', // changed regarding new design @cinewar
+            opacity: 0.65,
             maxWidth: '324px',
             boxSizing: 'border-box',
             height: '28px',

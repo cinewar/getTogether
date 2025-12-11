@@ -48,6 +48,12 @@ export interface IProps {
      */
     colorBase?: string;
 
+
+    /**
+     * change avatar bg @cinewar.
+     */
+    customBg?: string;
+
     /**
      * Indicates the default icon for the avatar.
      */
@@ -184,12 +190,14 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
             size,
             status,
             testId,
-            url
+            url,
+            customBg
         } = this.props;
         const { avatarFailed, isUsingCORS } = this.state;
 
         const avatarProps: AbstractProps & {
             className?: string;
+            customBg?: string;
             iconUser?: any;
             id?: string;
             status?: string;
@@ -207,7 +215,8 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
             status,
             testId,
             url: undefined,
-            useCORS: isUsingCORS
+            useCORS: isUsingCORS,
+            customBg
         };
 
         // _loadableAvatarUrl is validated that it can be loaded, but uri (if present) is not, so
@@ -240,8 +249,7 @@ class Avatar<P extends IProps> extends PureComponent<P, IState> {
         }
 
         return (
-            <StatelessAvatar
-                { ...avatarProps } />
+            <StatelessAvatar { ...avatarProps } />
         );
     }
 

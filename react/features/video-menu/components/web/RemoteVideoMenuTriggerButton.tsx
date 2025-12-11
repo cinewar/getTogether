@@ -106,8 +106,13 @@ const useStyles = makeStyles()(() => {
 
             '& svg': {
                 width: '18px',
-                height: '18px'
-            }
+                height: '18px',
+                fill: 'none' // changed for new design @cinewar
+            },
+            '& path': {
+                fill: '#000000' // changed for new design @cinewar
+            },
+
         },
 
         contextMenu: {

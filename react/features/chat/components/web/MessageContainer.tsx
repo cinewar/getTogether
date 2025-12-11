@@ -103,6 +103,7 @@ export default class MessageContainer extends Component<IProps, IState> {
             return (
                 <ChatMessageGroup
                     className = { messageType || MESSAGE_TYPE_REMOTE }
+                    groupIndex = { index } // Added groupIndex prop for color purposes @cinewar
                     key = { index }
                     messages = { messages } />
             );

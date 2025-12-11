@@ -7,9 +7,10 @@ const useStyles = makeStyles()(theme => {
     return {
         timer: {
             ...theme.typography.labelRegular,
-            color: theme.palette.text01,
+            color: '#000000', // changed regarding new design @cinewar
             padding: '6px 8px',
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            backgroundColor: '#37BEB1', // changed regarding new design @cinewar
+            opacity: 0.65,
             boxSizing: 'border-box',
             height: '28px',
             borderRadius: `0 ${theme.shape.borderRadius}px ${theme.shape.borderRadius}px 0`,

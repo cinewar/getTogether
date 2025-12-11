@@ -17,6 +17,7 @@ import MessageMenu from './MessageMenu';
 import ReactButton from './ReactButton';
 
 interface IProps extends IChatMessageProps {
+    bgColor?: string; // Added bgColor prop for message background color @cinewar
     className?: string;
     enablePrivateChat?: boolean;
     shouldDisplayMenuOnRight?: boolean;
@@ -44,10 +45,11 @@ const useStyles = makeStyles()((theme: Theme) => {
             display: 'inline-flex',
             padding: '12px',
             backgroundColor: theme.palette.ui02,
-            borderRadius: '4px 12px 12px 12px',
+            borderRadius: '12px 12px 12px 12px',
             maxWidth: '100%',
             marginTop: '4px',
             boxSizing: 'border-box' as const,
+            boxShadow: theme.shadows[3], // changed for new design @cinewar
 
             '&.file': {
                 display: 'flex',
@@ -146,7 +148,7 @@ const useStyles = makeStyles()((theme: Theme) => {
         },
         displayName: {
             ...theme.typography.labelBold,
-            color: theme.palette.text02,
+            color: '#777777', // Changed display name color for better contrast @cinewar
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
             overflow: 'hidden',
@@ -155,7 +157,7 @@ const useStyles = makeStyles()((theme: Theme) => {
         },
         userMessage: {
             ...theme.typography.bodyShortRegular,
-            color: theme.palette.text01,
+            color: '#000000', // Changed message text color to black for better contrast @cinewar
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word'
         },
@@ -207,6 +209,7 @@ const useStyles = makeStyles()((theme: Theme) => {
 });
 
 const ChatMessage = ({
+    bgColor, // Added bgColor prop for message background color @cinewar
     className = '',
     message,
     state,
@@ -375,7 +378,8 @@ const ChatMessage = ({
                         message.privateMessage && 'privatemessage',
                         message.lobbyChat && !knocking && 'lobbymessage',
                         isFileMessage(message) && 'file'
-                    ) }>
+                    ) }
+                    style = {{ backgroundColor: bgColor }} > {/* Applied bgColor style for message background color @cinewar */}
                     <div className = { classes.replyWrapper }>
                         <div className = { cx('messagecontent', classes.messageContent) }>
                             {showDisplayName && _renderDisplayName()}
@@ -451,6 +455,8 @@ const ChatMessage = ({
  */
 function _mapStateToProps(state: IReduxState, { message }: IProps) {
     const { knocking } = state['features/lobby'];
+
+    // console.log(message.participantId, message.participantId.slice(1, 2), parseInt(message.participantId.slice(1, 2)) % colors.length, 'message.participantId in chatmessage');
 
     const participant = getParticipantById(state, message.participantId);
 

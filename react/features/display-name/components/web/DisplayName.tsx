@@ -49,7 +49,7 @@ const useStyles = makeStyles()(theme => {
     return {
         displayName: {
             ...theme.typography.labelBold,
-            color: theme.palette.text01,
+            color: '#48FDEA', // bright cyan for visibility @cinewar
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap'

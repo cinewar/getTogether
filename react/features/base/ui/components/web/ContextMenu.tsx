@@ -133,12 +133,12 @@ const MAX_HEIGHT = 400;
 const useStyles = makeStyles()(theme => {
     return {
         contextMenu: {
-            backgroundColor: theme.palette.ui01,
-            border: `1px solid ${theme.palette.ui04}`,
+            backgroundColor: '#48FAE8', // Temporary fix for context menu flash issue @cinewar
+            // border: `1px solid ${theme.palette.ui04}`, // Temporary fix for context menu flash issue @cinewar
             borderRadius: `${Number(theme.shape.borderRadius)}px`,
             boxShadow: '0px 1px 2px rgba(41, 41, 41, 0.25)',
-            color: theme.palette.text01,
-            ...theme.typography.bodyShortRegular,
+            color: '#000000', // Temporary fix for context menu flash issue @cinewar
+            // ...theme.typography.bodyShortRegular,
             marginTop: '48px',
             position: 'absolute',
             right: `${participantsPaneTheme.panePadding}px`,

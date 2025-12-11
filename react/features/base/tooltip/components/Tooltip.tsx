@@ -22,11 +22,12 @@ interface IProps {
 const useStyles = makeStyles()(theme => {
     return {
         container: {
-            backgroundColor: theme.palette.uiBackground,
+            backgroundColor: '#000000', // change to desired tooltip background color @cinewar
+            boxShadow: theme.shadows[4],
             borderRadius: '3px',
             padding: theme.spacing(2),
             ...theme.typography.labelRegular,
-            color: theme.palette.text01,
+            color: '#48FAE8', // change to desired tooltip text color @cinewar
             position: 'relative',
 
             '&.mounting-animation': {
