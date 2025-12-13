@@ -83,17 +83,19 @@ const useStyles = makeStyles()(theme => {
     return {
         container: {
             alignItems: 'center',
-            color: theme.palette.text01,
+            color: 'theme.palette.text01',
             display: 'flex',
             ...theme.typography.bodyShortBold,
-            margin: `0 -${participantsPaneTheme.panePadding}px`,
-            padding: `${theme.spacing(2)} ${participantsPaneTheme.panePadding}px`,
+            margin: `5 -${participantsPaneTheme.panePadding - 6}px`,
+            padding: `${theme.spacing(2)} ${participantsPaneTheme.panePadding - 14}px`,
             position: 'relative',
-            boxShadow: 'inset 0px -1px 0px rgba(255, 255, 255, 0.15)',
             minHeight: '40px',
+            backgroundColor: '#DFFFAF',
+            boxShadow: theme.shadows[4],
+            borderRadius: '7px',
 
             '&:hover, &:focus-within': {
-                backgroundColor: theme.palette.ui02,
+                backgroundColor: 'rgba(0,0,0,0.24)',
 
                 '& .indicators': {
                     display: 'none'
@@ -141,7 +143,8 @@ const useStyles = makeStyles()(theme => {
             marginRight: theme.spacing(2),
             overflow: 'hidden',
             flexDirection: 'column',
-            justifyContent: 'flex-start'
+            justifyContent: 'flex-start',
+            color: '#000000' /* changed for better view @cinewar */
         },
 
         indicators: {
@@ -170,8 +173,8 @@ const useStyles = makeStyles()(theme => {
         actionsContainer: {
             position: 'absolute',
             top: '-1000px',
-            boxShadow: `-15px 0px 10px -5px ${theme.palette.ui02}`,
-            backgroundColor: theme.palette.ui02
+            boxShadow: 'none !important',
+            backgroundColor: 'transparent !important',
         },
 
         actionsPermanent: {

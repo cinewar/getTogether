@@ -43,7 +43,7 @@ interface IStylesProps {
 const useStyles = makeStyles<IStylesProps>()((theme, { isChatOpen }) => {
     return {
         participantsPane: {
-            backgroundColor: theme.palette.ui01,
+            backgroundColor: '#B2F1EA',
             flexShrink: 0,
             position: 'relative',
             transition: 'width .16s ease-in-out',
@@ -94,14 +94,25 @@ const useStyles = makeStyles<IStylesProps>()((theme, { isChatOpen }) => {
                         wordBreak: 'break-word'
                     }
                 }
-            }
+            },
+
+            /** added for button styling to participants pane @cinewar */
+            'button': {
+                backgroundColor: '#E631FA',
+                minHeight: '42px',
+                justifyContent: 'left',
+                'svg': {
+                    width: '24px',
+                    height: '24px'
+                }
+            },
         },
 
         closeButton: {
             alignItems: 'center',
             cursor: 'pointer',
             display: 'flex',
-            justifyContent: 'center'
+            justifyContent: 'center',
         },
 
         header: {

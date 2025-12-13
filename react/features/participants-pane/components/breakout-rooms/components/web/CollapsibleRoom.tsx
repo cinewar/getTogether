@@ -84,7 +84,8 @@ interface IProps {
 const useStyles = makeStyles()(theme => {
     return {
         container: {
-            boxShadow: 'none'
+            boxShadow: theme.shadows[4], // added for better view @cinewar
+            backgroundColor: '#FFAFEA', // changed for better view @cinewar
         },
 
         roomName: {

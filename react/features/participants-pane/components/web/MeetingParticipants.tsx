@@ -26,7 +26,7 @@ const useStyles = makeStyles()(theme => {
             color: theme.palette.warning02
         },
         heading: {
-            color: theme.palette.text02,
+            color: '#000000', // changed for better view @cinewar
             ...theme.typography.bodyShortBold,
             marginBottom: theme.spacing(3),
 

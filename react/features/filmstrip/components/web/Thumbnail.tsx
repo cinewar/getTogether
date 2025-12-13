@@ -305,7 +305,7 @@ const defaultStyles = (theme: Theme) => {
             height: '100%',
             width: '100%',
             borderRadius: '4px',
-            backgroundColor: theme.palette.ui02
+            backgroundColor: '#d2d2d2' // changed regarding new design @cinewar
         },
 
         borderIndicator: {

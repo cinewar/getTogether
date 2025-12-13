@@ -39,11 +39,11 @@ interface IProps extends INotificationProps {
 const useStyles = makeStyles()((theme: Theme) => {
     return {
         container: {
-            backgroundColor: theme.palette.ui10,
+            backgroundColor: '#48FDEA', // change to desired background color new design @cinewar
             padding: '8px 16px 8px 20px',
             display: 'flex',
             position: 'relative' as const,
-            borderRadius: `${theme.shape.borderRadius}px`,
+            borderRadius: '1000px',
             boxShadow: '0px 6px 20px rgba(0, 0, 0, 0.25)',
             marginBottom: theme.spacing(2),
 
@@ -77,27 +77,32 @@ const useStyles = makeStyles()((theme: Theme) => {
         },
 
         ribbon: {
-            width: '4px',
-            height: 'calc(100% - 16px)',
+            width: '100%',
+            height: '100%',
             position: 'absolute' as const,
-            left: 0,
-            top: '8px',
-            borderRadius: '4px',
+            left: '-4px',
+            top: '-0px',
+            borderRadius: '1000px',
+            zIndex: -1,
 
             '&.normal': {
-                backgroundColor: theme.palette.action01
+                backgroundColor: 'transparent',
+                borderLeft: `7px solid ${theme.palette.action01}`,
             },
 
             '&.error': {
-                backgroundColor: theme.palette.iconError
+                backgroundColor: 'transparent',
+                borderLeft: `7px solid ${theme.palette.iconError}`,
             },
 
             '&.success': {
-                backgroundColor: theme.palette.success01
+                backgroundColor: 'transparent',
+                borderLeft: `7px solid ${theme.palette.success01}`,
             },
 
             '&.warning': {
-                backgroundColor: theme.palette.warning01
+                backgroundColor: 'transparent',
+                borderLeft: `7px solid ${theme.palette.warning01}`,
             }
         },
 

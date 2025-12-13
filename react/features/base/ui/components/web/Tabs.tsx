@@ -56,7 +56,7 @@ const useStyles = makeStyles()(theme => {
 
             '&.selected': {
                 color: theme.palette.text01,
-                borderColor: theme.palette.action01
+                borderColor: '#E631FA' // changed regarding new design @cinewar
             },
 
             '&:disabled': {

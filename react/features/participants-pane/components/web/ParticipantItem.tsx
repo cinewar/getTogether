@@ -114,7 +114,8 @@ const useStyles = makeStyles()(theme => {
         },
 
         avatar: {
-            marginRight: theme.spacing(3)
+            marginRight: theme.spacing(3),
+            boxShadow: theme.shadows[3], // added for better view @cinewar
         }
     };
 });

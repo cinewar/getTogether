@@ -141,7 +141,7 @@ const useStyles = makeStyles<{ _isResizing: boolean; width: number; }>()((theme,
             padding: `${theme.spacing(3)} ${theme.spacing(4)}`,
             alignItems: 'center',
             boxSizing: 'border-box',
-            color: theme.palette.text01,
+            color: '#000000', // changed regarding new design @cinewar
             ...theme.typography.heading6,
             lineHeight: 'unset',
             fontWeight: theme.typography.heading6.fontWeight as any,
@@ -205,7 +205,7 @@ const useStyles = makeStyles<{ _isResizing: boolean; width: number; }>()((theme,
         },
 
         dragHandle: {
-            backgroundColor: theme.palette.icon02,
+            backgroundColor: '#E631FA', // changed regarding new design @cinewar
             height: '100px',
             width: '3px',
             borderRadius: '1px'

@@ -45,7 +45,7 @@ const useStyles = makeStyles()(theme => {
             cursor: 'pointer',
             padding: `${theme.spacing(1)} 0`,
             ...theme.typography.bodyShortBold,
-            color: theme.palette.text02,
+            color: 'theme.palette.text02',
             flexShrink: 0
         },
         arrowContainer: {
